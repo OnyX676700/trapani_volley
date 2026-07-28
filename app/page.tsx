@@ -609,9 +609,6 @@ function Classifica() {
             })}
           </div>
         </AnimCard>
-        <p style={{ marginTop: 16, fontSize: "0.78rem", color: "rgba(255,255,255,0.35)", textAlign: "center" }}>
-          Dati di esempio — collega la classifica ufficiale del campionato per aggiornarla automaticamente.
-        </p>
       </div>
     </section>
   );
