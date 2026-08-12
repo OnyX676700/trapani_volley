@@ -1,3 +1,4 @@
+//app/page.tsx
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -8,24 +9,24 @@ import GlobalStyles from "./components/GlobalStyles";
 
 /* ── Dati: Organigramma (dalle tue grafiche staff) ── */
 const ORGANIGRAMMA = [
-  { nome: "Rocco Poma", ruolo: "Presidente" },
-  { nome: "Mimmo Grimaldi", ruolo: "Vicepresidente" },
-  { nome: "Daniela Del Giudice", ruolo: "Team Manager" },
-  { nome: "Salvatore Restuccia", ruolo: "Responsabile Sanitario" },
-  { nome: "Rino Fontana", ruolo: "Dirigente" },
-  { nome: "Maurizio Virgilio", ruolo: "Dirigente" },
-  { nome: "Enza Vario", ruolo: "Collaboratrice" },
-  { nome: "Ignazio Vario", ruolo: "Collaboratore" },
-  { nome: "Santo Vassallo", ruolo: "Collaboratore" },
-  { nome: "Francesco Oddo", ruolo: "Grafico & Social Media Manager" },
+  { nome: "Rocco Poma", ruolo: "Presidente", file: "/img/staff/Pomq.jpg" },
+  { nome: "Mimmo Grimaldi", ruolo: "Vicepresidente", file: "/img/staff/Grimaldi.jpg" },
+  { nome: "Daniela Del Giudice", ruolo: "Team Manager", file: "/img/staff/DelGiudice.jpg" },
+  { nome: "Salvatore Restuccia", ruolo: "Responsabile Sanitario", file: "/img/staff/Restuccia.jpg" },
+  { nome: "Rino Fontana", ruolo: "Dirigente", file: "/img/staff/Fontana.jpg" },
+  { nome: "Maurizio Virgilio", ruolo: "Dirigente", file: "/img/staff/Virgilio.jpg" },
+  { nome: "Enza Vario", ruolo: "Collaboratrice", file: "/img/staff/Vario.jpg" },
+  { nome: "Ignazio Vario", ruolo: "Collaboratore", file: "/img/staff/Vario.jpg" },
+  { nome: "Santo Vassallo", ruolo: "Collaboratore", file: "/img/staff/Vassallo.jpg" },
+  { nome: "Francesco Oddo", ruolo: "Grafico & Social Media Manager", file: "/img/staff/Oddo.jpg" },
 ];
 
 /* ── Dati: Staff tecnico ── */
 const STAFF_TECNICO = [
-  { nome: "Piervito Volpetti", ruolo: "Direttore Tecnico & Coach" },
-  { nome: "Andrea Gianno", ruolo: "Coach" },
-  { nome: "Giuseppe Oddo", ruolo: "Coach" },
-  { nome: "Gioacchino Di Bella", ruolo: "Assistant Coach" },
+  { nome: "Piervito Vulpetti", ruolo: "Direttore Tecnico & Coach", file: "/img/staff/Vulpetti.jpg" },
+  { nome: "Andrea Gianno", ruolo: "Coach", file: "/img/staff/Gianno.jpg" },
+  { nome: "Giuseppe Oddo", ruolo: "Coach", file: "/img/staff/Oddo.jpg" },
+  { nome: "Gioacchino Di Bella", ruolo: "Assistant Coach", file: "/img/staff/DiBella.jpg" },
 ];
 
 /* ── Dati: Roster femminile (integra il maschile quando disponibile) ── */
@@ -132,23 +133,154 @@ function Hero() {
   );
 }
 
-/* ── Storia (ex About) ── */
+/* ── Storia ── */
 function Storia() {
   const [ref, visible] = useInView();
   return (
     <section id="storia" style={{ padding: "100px 24px", background: "#0d0d0d" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 56, alignItems: "center" }} className="tv-about-grid">
+        {/* Intro + foto */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 56, alignItems: "center", marginBottom: 80 }} className="tv-about-grid">
           <div ref={ref} style={{ opacity: visible ? 1 : 0, transform: visible ? "none" : "translateY(20px)", transition: "opacity 0.6s,transform 0.6s" }}>
-            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: "uppercase", color: "#8a2236", display: "block", marginBottom: 12 }}>Chi siamo</span>
-            <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#fff", marginBottom: 20, lineHeight: 1.15 }}>La nostra storia</h2>
+            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: "uppercase", color: "#8a2236", display: "block", marginBottom: 12 }}>
+              Chi siamo
+            </span>
+            <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#fff", marginBottom: 20, lineHeight: 1.15 }}>
+              La nostra storia
+            </h2>
+            <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.2rem", fontWeight: 700, color: "#ff9d9d", marginBottom: 16 }}>
+              Una nuova realtà, una grande ambizione
+            </h3>
             <p style={{ fontSize: "1.05rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.85 }}>
-              Trapani Volley porta i colori granata della città di Trapani. Fondata con passione e spirito di comunità, promuove la pallavolo a tutti i livelli — dal settore giovanile fino ai campionati senior.
+              Fondata nel <strong style={{ color: "#fff" }}>2025</strong>, Trapani Volley nasce con un obiettivo preciso: diventare la{" "}
+              <strong style={{ color: "#fff" }}>scuola di pallavolo di riferimento della città di Trapani</strong>, costruendo nel tempo
+              una realtà sportiva solida, organizzata e capace di coinvolgere atleti, famiglie e territorio.
             </p>
           </div>
+
           <div style={{ position: "relative", borderRadius: 24, overflow: "hidden", boxShadow: "0 30px 70px rgba(0,0,0,0.45)", aspectRatio: "4/3" }}>
             <Image src="/img/presidente-coppa.jpg" alt="Presidente Trapani Volley con la coppa" fill style={{ objectFit: "cover" }} />
           </div>
+        </div>
+
+        {/* Corpo articolo */}
+        <div style={{ maxWidth: 780, margin: "0 auto", display: "flex", flexDirection: "column", gap: 44 }}>
+          <AnimCard>
+            <p style={{ fontSize: "1.02rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.9 }}>
+              Trapani Volley è oggi <strong style={{ color: "#fff" }}>l&apos;unica società pallavolistica a rappresentare i colori granata</strong>,
+              portando con orgoglio il nome della città nei campionati ufficiali <strong style={{ color: "#fff" }}>FIPAV e PGS</strong>.
+            </p>
+          </AnimCard>
+
+          <AnimCard delay={0.05}>
+            <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: 16 }}>
+              Una crescita straordinaria
+            </h3>
+            <p style={{ fontSize: "1.02rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.9, marginBottom: 20 }}>
+              Il percorso della società è stato fin da subito caratterizzato da una crescita importante. In soli otto mesi di attività,
+              Trapani Volley ha raggiunto <strong style={{ color: "#fff" }}>oltre 160 atleti tesserati</strong>, dando vita a un settore
+              giovanile articolato e a un progetto che parte dai più piccoli, con i corsi di <strong style={{ color: "#fff" }}>Minivolley</strong>,
+              e arriva alle prime squadre.
+            </p>
+            <p style={{ fontSize: "1.02rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.9, marginBottom: 16 }}>
+              La società partecipa complessivamente a <strong style={{ color: "#fff" }}>sette campionati FIPAV</strong>, oltre ai
+              campionati PGS, con una struttura composta da:
+            </p>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 10 }}>
+              {[
+                "Serie D Femminile",
+                "Serie D Maschile",
+                "numerose formazioni giovanili",
+                "corsi di Minivolley",
+              ].map((item) => (
+                <li key={item} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: "1.02rem", color: "rgba(255,255,255,0.75)" }}>
+                  <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#ff7676", flexShrink: 0 }} />
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <p style={{ fontSize: "1.02rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.9, marginTop: 20 }}>
+              Un percorso pensato per accompagnare ogni atleta nella propria crescita, sportiva e personale.
+            </p>
+          </AnimCard>
+
+          <AnimCard delay={0.1}>
+            <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: 16 }}>
+              Il successo in campo
+            </h3>
+            <p style={{ fontSize: "1.02rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.9, marginBottom: 16 }}>
+              La prima stagione ha già regalato risultati importanti, confermando la qualità del lavoro svolto.
+            </p>
+            <p style={{ fontSize: "1.02rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.9, marginBottom: 16 }}>
+              La <strong style={{ color: "#fff" }}>Prima Squadra Femminile</strong> ha conquistato la{" "}
+              <strong style={{ color: "#fff" }}>promozione in Serie D</strong>, vincendo il campionato da imbattuta dopo{" "}
+              <strong style={{ color: "#fff" }}>15 gare</strong>: un traguardo storico per una società nata da appena pochi mesi.
+            </p>
+            <p style={{ fontSize: "1.02rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.9, marginBottom: 16 }}>
+              Importante anche il percorso della <strong style={{ color: "#fff" }}>Prima Squadra Maschile</strong>, capace di
+              raggiungere il <strong style={{ color: "#fff" }}>3º posto alle Finali Regionali PGS di Messina</strong>.
+            </p>
+            <p style={{ fontSize: "1.02rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.9 }}>
+              Risultati che rappresentano soltanto l&apos;inizio di un progetto costruito con ambizione, passione e programmazione.
+            </p>
+          </AnimCard>
+
+          <AnimCard delay={0.15}>
+            <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: 16 }}>
+              Una società radicata nella città
+            </h3>
+            <p style={{ fontSize: "1.02rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.9, marginBottom: 16 }}>
+              La crescita di Trapani Volley è sostenuta da uno <strong style={{ color: "#fff" }}>staff qualificato</strong>, formato da
+              allenatori federali, dirigenti e professionisti della comunicazione, e da una presenza capillare sul territorio.
+            </p>
+            <p style={{ fontSize: "1.02rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.9, marginBottom: 16 }}>
+              La società gestisce infatti <strong style={{ color: "#fff" }}>alcune palestre scolastiche</strong>, distribuite in
+              diversi quartieri della città, creando una rete di spazi che permette di svolgere quotidianamente tutte le attività
+              sportive e di portare la pallavolo sempre più vicino alle famiglie trapanesi.
+            </p>
+            <p style={{ fontSize: "1.02rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.9 }}>
+              Per Trapani Volley, infatti, fare sport significa anche creare comunità, offrire ai giovani un ambiente sano in cui
+              crescere e contribuire alla valorizzazione del territorio.
+            </p>
+          </AnimCard>
+
+          <AnimCard delay={0.2}>
+            <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: 16 }}>
+              Una squadra anche fuori dal campo
+            </h3>
+            <p style={{ fontSize: "1.02rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.9, marginBottom: 16 }}>
+              La nostra crescita non si misura soltanto attraverso i risultati sportivi.
+            </p>
+            <p style={{ fontSize: "1.02rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.9 }}>
+              In pochi mesi, Trapani Volley ha costruito una <strong style={{ color: "#fff" }}>community digitale in costante
+              espansione</strong>, raggiungendo circa <strong style={{ color: "#fff" }}>4 milioni di visualizzazioni complessive
+              nei primi otto mesi di attività</strong>. Una presenza online che racconta quotidianamente la vita della società, le
+              partite, gli atleti e i valori del progetto, creando un punto di incontro tra squadra, tifosi, famiglie e territorio.
+            </p>
+          </AnimCard>
+
+          <AnimCard delay={0.25}>
+            <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: 16 }}>
+              Il futuro è granata
+            </h3>
+            <p style={{ fontSize: "1.02rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.9, marginBottom: 16 }}>
+              Trapani Volley è una società giovane, ma con una visione chiara:{" "}
+              <strong style={{ color: "#fff" }}>crescere, formare e rappresentare Trapani attraverso la pallavolo</strong>.
+            </p>
+            <p style={{ fontSize: "1.02rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.9, marginBottom: 16 }}>
+              Ogni atleta, ogni allenatore, ogni dirigente, ogni famiglia e ogni partner fa parte di un progetto che guarda al
+              futuro con entusiasmo e ambizione.
+            </p>
+            <p style={{ fontSize: "1.02rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.9, marginBottom: 28 }}>
+              Perché la nostra storia è appena iniziata.
+            </p>
+            <p style={{
+              fontFamily: "'Playfair Display',serif", fontSize: "1.3rem", fontWeight: 700, color: "#ff9d9d",
+              lineHeight: 1.5, borderLeft: "3px solid #ff7676", paddingLeft: 20,
+            }}>
+              Trapani Volley. Una città. Un colore. Una squadra. Un futuro da costruire insieme.
+            </p>
+          </AnimCard>
         </div>
       </div>
     </section>

@@ -48,6 +48,17 @@ export default function GlobalStyles() {
       @media (max-width: 560px) {
         .tv-classifica-header, .tv-classifica-row { grid-template-columns: 28px 1fr 34px 34px 34px 48px !important; padding-left: 12px !important; padding-right: 12px !important; }
       }
+
+      @keyframes tvSponsorScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.tv-sponsor-track {
+  animation: tvSponsorScroll 28s linear infinite;
+}
+.tv-sponsor-track:hover {
+  animation-play-state: paused;
+}
     `;
     document.head.appendChild(s);
     return () => { const el = document.getElementById(id); if (el) el.remove(); };
