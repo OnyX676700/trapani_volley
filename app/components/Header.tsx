@@ -116,13 +116,13 @@ export default function Header() {
                 href={item.href!}
                 onClick={(e) => handleNavClick(e, item.href!)}
                 style={{
-                  color: "rgba(255,255,255,0.72)", cursor: "pointer", padding: "8px 12px",
+                  color: "#fff", cursor: "pointer", padding: "8px 12px",
                   fontFamily: "'DM Sans',sans-serif", fontSize: 13, fontWeight: 600, letterSpacing: 0.5,
                   textTransform: "uppercase", textDecoration: "none", borderRadius: 6,
                   transition: "background 0.2s,color 0.2s",
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = "#fff"; e.currentTarget.style.background = "rgba(255,255,255,0.07)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.72)"; e.currentTarget.style.background = "none"; }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = "#fff"; e.currentTarget.style.background = "rgba(255,255,255,0.12)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = "#fff"; e.currentTarget.style.background = "none"; }}
               >
                 {item.label}
               </Link>
@@ -139,8 +139,8 @@ export default function Header() {
               <button
                 onClick={() => setOpenDesktop(isOpen ? null : item.label)}
                 style={{
-                  background: isOpen ? "rgba(255,255,255,0.09)" : "none", border: "none",
-                  color: isOpen ? "#fff" : "rgba(255,255,255,0.72)", cursor: "pointer", padding: "8px 12px",
+                  background: isOpen ? "rgba(255,255,255,0.12)" : "none", border: "none",
+                  color: "#fff", cursor: "pointer", padding: "8px 12px",
                   fontFamily: "'DM Sans',sans-serif", fontSize: 13, fontWeight: 600, letterSpacing: 0.5,
                   textTransform: "uppercase", borderRadius: 6, display: "flex", alignItems: "center", gap: 5,
                 }}
@@ -154,7 +154,7 @@ export default function Header() {
               {isOpen && (
                 <div className="tv-dropdown">
                   {item.submenu.map((sub) => (
-                    <Link key={sub.label} href={sub.href} onClick={(e) => handleNavClick(e, sub.href)}>
+                    <Link key={sub.label} href={sub.href} onClick={(e) => handleNavClick(e, sub.href)} style={{ color: "#fff" }}>
                       {sub.label}
                     </Link>
                   ))}
@@ -184,7 +184,7 @@ export default function Header() {
           {langOpen && (
             <div className="tv-dropdown" style={{ minWidth: 90, right: 0, left: "auto" }}>
               {LANGS.map((l) => (
-                <button key={l.code} onClick={() => { setLang(l.code); setLangOpen(false); }}>
+                <button key={l.code} onClick={() => { setLang(l.code); setLangOpen(false); }} style={{ color: "#fff" }}>
                   {l.label}
                 </button>
               ))}
@@ -219,7 +219,7 @@ export default function Header() {
             if (!item.submenu) {
               return (
                 <Link key={item.label} href={item.href!} onClick={(e) => handleNavClick(e, item.href!)} style={{
-                  color: "rgba(255,255,255,0.85)", padding: "11px 14px", borderRadius: 8,
+                  color: "#fff", padding: "11px 14px", borderRadius: 8,
                   fontFamily: "'DM Sans',sans-serif", fontSize: 14, fontWeight: 500, textDecoration: "none",
                 }}>
                   {item.label}
@@ -231,7 +231,7 @@ export default function Header() {
               <div key={item.label}>
                 <button onClick={() => setOpenMobile(isOpen ? null : item.label)} style={{
                   width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center",
-                  background: "none", border: "none", color: "rgba(255,255,255,0.85)",
+                  background: "none", border: "none", color: "#fff",
                   padding: "11px 14px", borderRadius: 8, fontFamily: "'DM Sans',sans-serif", fontSize: 14, fontWeight: 500,
                 }}>
                   {item.label}
@@ -244,7 +244,7 @@ export default function Header() {
                   <div style={{ paddingLeft: 14, display: "flex", flexDirection: "column" }}>
                     {item.submenu.map((sub) => (
                       <Link key={sub.label} href={sub.href} onClick={(e) => handleNavClick(e, sub.href)} style={{
-                        color: "rgba(255,255,255,0.65)", padding: "9px 14px", fontSize: 13.5, textDecoration: "none",
+                        color: "#fff", padding: "9px 14px", fontSize: 13.5, textDecoration: "none",
                       }}>
                         {sub.label}
                       </Link>
