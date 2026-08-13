@@ -17,8 +17,8 @@ export const NAV_STRUCTURE: NavItem[] = [
     label: "Club",
     submenu: [
       { label: "Storia", href: "/#storia" },
-      { label: "Organigramma", href: "/#organigramma" },
-      { label: "Staff tecnico", href: "/#staff-tecnico" },
+      { label: "Organigramma", href: "../club/organigramma" },
+      { label: "Staff tecnico", href: "../club/staff-tecnico" },
       { label: "Roster M/F", href: "/#roster" },
     ],
   },
@@ -29,8 +29,8 @@ export const NAV_STRUCTURE: NavItem[] = [
   {
     label: "Giovanili",
     submenu: [
-      { label: "Under 18", href: "/#giovanili-u18" },
-      { label: "Under 16", href: "/#giovanili-u16" },
+      { label: "Under 12-13-14-15-17 F", href: "/#giovanili" },
+      { label: "Under 17 M", href: "/#giovanili" },
     ],
   },
   { label: "Sponsor & Partner", href: "/sponsor" },

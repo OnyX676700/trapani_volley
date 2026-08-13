@@ -6,44 +6,43 @@ import Image from "next/image";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import GlobalStyles from "./components/GlobalStyles";
+import NewsCarousel from "./components/NewsCarousel";
+import SponsorMarquee from "./components/SponsorMarquee";
+import TvSection from "./components/TvSection";
 
-/* ── Dati: Organigramma (dalle tue grafiche staff) ── */
-const ORGANIGRAMMA = [
-  { nome: "Rocco Poma", ruolo: "Presidente", file: "/img/staff/Pomq.jpg" },
-  { nome: "Mimmo Grimaldi", ruolo: "Vicepresidente", file: "/img/staff/Grimaldi.jpg" },
-  { nome: "Daniela Del Giudice", ruolo: "Team Manager", file: "/img/staff/DelGiudice.jpg" },
-  { nome: "Salvatore Restuccia", ruolo: "Responsabile Sanitario", file: "/img/staff/Restuccia.jpg" },
-  { nome: "Rino Fontana", ruolo: "Dirigente", file: "/img/staff/Fontana.jpg" },
-  { nome: "Maurizio Virgilio", ruolo: "Dirigente", file: "/img/staff/Virgilio.jpg" },
-  { nome: "Enza Vario", ruolo: "Collaboratrice", file: "/img/staff/Vario.jpg" },
-  { nome: "Ignazio Vario", ruolo: "Collaboratore", file: "/img/staff/Vario.jpg" },
-  { nome: "Santo Vassallo", ruolo: "Collaboratore", file: "/img/staff/Vassallo.jpg" },
-  { nome: "Francesco Oddo", ruolo: "Grafico & Social Media Manager", file: "/img/staff/Oddo.jpg" },
-];
+/* ── Tipo Atleta ── */
+interface Athlete {
+  name: string;
+  image?: string; // Percorso immagine (es: "/img/roster/inglese.jpg"). Opzionale.
+}
 
-/* ── Dati: Staff tecnico ── */
-const STAFF_TECNICO = [
-  { nome: "Piervito Vulpetti", ruolo: "Direttore Tecnico & Coach", file: "/img/staff/Vulpetti.jpg" },
-  { nome: "Andrea Gianno", ruolo: "Coach", file: "/img/staff/Gianno.jpg" },
-  { nome: "Giuseppe Oddo", ruolo: "Coach", file: "/img/staff/Oddo.jpg" },
-  { nome: "Gioacchino Di Bella", ruolo: "Assistant Coach", file: "/img/staff/DiBella.jpg" },
-];
-
-/* ── Dati: Roster femminile (integra il maschile quando disponibile) ── */
-const ROSTER = {
-  stagione: "2026/2027",
+/* ── Dati: Roster femminile/maschile ── */
+const ROSTER: { stagione: string; femminile: Athlete[]; maschile: Athlete[] } = {
+  stagione: "2025/2026",
   femminile: [
-    "Inglese D.", "La Vecchia A.", "Mazzola M.", "Montalto I.", "Morello A.",
-    "Alastra G.", "Grimaldi C.", "Di Maggio K.", "Lombardo R.", "Hernandez K.",
-    "Oddo M.", "Salerno C.", "Goretti V.", "Barraco F.", "Lombardo S.",
-  ] as string[],
-  maschile: [] as string[], // ← da compilare quando avrai la rosa maschile
+    { name: "Inglese D.", image: "/img/rosterF/Inglese.jpg" },
+    { name: "La Vecchia A.", image: "/img/rosterF/LaVecchia.jpg" },
+    { name: "Mazzola M.", image: "/img/rosterF/Mazzola.jpg" },
+    { name: "Montalto I.", image: "/img/rosterF/Montalto.jpg" },
+    { name: "Morello A.", image: "/img/rosterF/Morello.jpg" },
+    { name: "Alastra G.", image: "/img/rosterF/Alastra.jpg" },
+    { name: "Grimaldi C.", image: "/img/rosterF/GrimaldiC.jpg" },
+    { name: "Di Maggio K.", image: "/img/rosterF/DiMaggio.jpg" },
+    { name: "Lombardo R.", image: "/img/rosterF/LombardoR.jpg" },
+    { name: "Hernandez K.", image: "" },
+    { name: "Oddo M.", image: "" },
+    { name: "Salerno C.", image: "/img/rosterF/Salerno.jpg" },
+    { name: "Goretti V.", image: "/img/rosterF/Goretti.jpg" },
+    { name: "Barraco F.", image: "/img/rosterF/Barraco.jpg" },
+    { name: "Lombardo S.", image: "/img/rosterF/LombardoS.jpg" },
+  ],
+  maschile: [],
 };
 
-/* ── Dati: Giovanili (aggiungi le categorie mancanti) ── */
+/* ── Dati: Giovanili ── */
 const GIOVANILI = [
-  { id: "giovanili-u18", categoria: "Under 18", text: "Attività, allenamenti e calendario delle gare della formazione Under 18." },
-  { id: "giovanili-u16", categoria: "Under 16", text: "Percorso dedicato alla crescita tecnica e fisica delle atlete Under 16." },
+  { id: "giovanili-F", categoria: "Under Femminile", text: "Aggiungere testo.." },
+  { id: "giovanili-M", categoria: "Under Maschile", text: "Aggiungere testo.." },
 ];
 
 const STANDINGS = [
@@ -72,7 +71,15 @@ function useInView(threshold = 0.15) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVisible(true); io.disconnect(); } }, { threshold });
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setVisible(true);
+          io.disconnect();
+        }
+      },
+      { threshold }
+    );
     io.observe(el);
     return () => io.disconnect();
   }, [threshold]);
@@ -86,12 +93,15 @@ function scrollTo(id: string) {
 function AnimCard({ children, delay = 0, style = {} }: { children: React.ReactNode; delay?: number; style?: React.CSSProperties }) {
   const [ref, visible] = useInView();
   return (
-    <div ref={ref} style={{
-      opacity: visible ? 1 : 0,
-      transform: visible ? "translateY(0)" : "translateY(28px)",
-      transition: `opacity 0.55s ease ${delay}s, transform 0.55s ease ${delay}s`,
-      ...style,
-    }}>
+    <div
+      ref={ref}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(28px)",
+        transition: `opacity 0.55s ease ${delay}s, transform 0.55s ease ${delay}s`,
+        ...style,
+      }}
+    >
       {children}
     </div>
   );
@@ -100,9 +110,21 @@ function AnimCard({ children, delay = 0, style = {} }: { children: React.ReactNo
 function SectionHeading({ eyebrow, title }: { eyebrow: string; title: string }) {
   const [ref, visible] = useInView();
   return (
-    <div ref={ref} style={{ opacity: visible ? 1 : 0, transform: visible ? "none" : "translateY(20px)", transition: "opacity 0.6s,transform 0.6s", marginBottom: 48 }}>
-      <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: "uppercase", color: "#8a2236", display: "block", marginBottom: 12 }}>{eyebrow}</span>
-      <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#6f1d2b", lineHeight: 1.15 }}>{title}</h2>
+    <div
+      ref={ref}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "none" : "translateY(20px)",
+        transition: "opacity 0.6s,transform 0.6s",
+        marginBottom: 48,
+      }}
+    >
+      <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: "uppercase", color: "#8a2236", display: "block", marginBottom: 12 }}>
+        {eyebrow}
+      </span>
+      <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#6f1d2b", lineHeight: 1.15 }}>
+        {title}
+      </h2>
     </div>
   );
 }
@@ -116,13 +138,13 @@ function Hero() {
       <div style={{ position: "absolute", inset: 0, zIndex: 2, pointerEvents: "none", background: "radial-gradient(ellipse at 50% 45%, transparent 40%, rgba(0,0,0,0.55) 100%)" }} />
       <div style={{ position: "relative", zIndex: 3, padding: "0 24px", maxWidth: 680, animation: "tvFadeUp 0.9s ease both" }}>
         <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 4, textTransform: "uppercase", color: "#ffffff", textShadow: "0 4px 20px rgb(0, 0, 0)", margin: "0 0 20px", opacity: 0.9 }}>
-          Il volley che unisce una città
+          #CuoreGranata
         </p>
         <h1 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(3rem,7vw,5.5rem)", fontWeight: 900, color: "#fff", margin: "0 0 16px", lineHeight: 1.05, letterSpacing: -1, textShadow: "0 4px 30px rgba(0,0,0,0.5)" }}>
           Trapani Volley
         </h1>
         <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: 3, textTransform: "uppercase", color: "#ffffff", textShadow: "0 4px 20px rgb(0, 0, 0)", margin: "0 0 32px", opacity: 0.85 }}>
-          #CuoreGranata
+          Il volley che unisce una città
         </p>
         <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
           <button onClick={() => scrollTo("storia")} style={{ background: "rgba(255,255,255,0.12)", border: "1.5px solid rgba(255,255,255,0.3)", borderRadius: 50, color: "#fff", padding: "13px 34px", fontSize: 15, fontWeight: 600, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
@@ -143,7 +165,6 @@ function Storia() {
   return (
     <section id="storia" style={{ padding: "100px 24px", background: "#ffffff" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-        {/* Intro + foto */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 56, alignItems: "center", marginBottom: 80 }} className="tv-about-grid">
           <div ref={ref} style={{ opacity: visible ? 1 : 0, transform: visible ? "none" : "translateY(20px)", transition: "opacity 0.6s,transform 0.6s" }}>
             <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: "uppercase", color: "#8a2236", display: "block", marginBottom: 12 }}>
@@ -163,11 +184,10 @@ function Storia() {
           </div>
 
           <div style={{ position: "relative", borderRadius: 24, overflow: "hidden", boxShadow: "0 30px 70px rgba(0,0,0,0.18)", aspectRatio: "4/3" }}>
-            <Image src="/img/presidente-coppa.jpg" alt="Presidente Trapani Volley con la coppa" fill style={{ objectFit: "cover" }} />
+            <Image src="/img/storia.jpg" alt="Presidente Trapani Volley con la coppa" fill style={{ objectFit: "cover" }} />
           </div>
         </div>
 
-        {/* Corpo articolo */}
         <div style={{ maxWidth: 780, margin: "0 auto", display: "flex", flexDirection: "column", gap: 44 }}>
           <AnimCard>
             <p style={{ fontSize: "1.02rem", color: "rgba(20,20,20,0.72)", lineHeight: 1.9 }}>
@@ -291,58 +311,22 @@ function Storia() {
   );
 }
 
-/* ── Organigramma ── */
-function Organigramma() {
-  return (
-    <section id="organigramma" style={{ padding: "100px 24px", background: "#ffffff" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-        <SectionHeading eyebrow="Chi guida il club" title="Organigramma" />
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(220px,1fr))", gap: 16 }}>
-          {ORGANIGRAMMA.map(({ nome, ruolo }, i) => (
-            <AnimCard key={nome} delay={(i % 8) * 0.05}>
-              <div style={{ background: "#f7f5f4", border: "1px solid rgba(0,0,0,0.08)", borderRadius: 16, padding: "26px 18px", textAlign: "center" }}>
-                <div style={{ width: 56, height: 56, borderRadius: "50%", margin: "0 auto 14px", background: "linear-gradient(135deg,#6f1d2b,#4f1218)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Playfair Display',serif", fontWeight: 900, fontSize: "1.05rem", color: "#ff9d9d", border: "1px solid rgba(255,255,255,0.1)" }}>
-                  {nome.split(" ").map((p) => p[0]).join("").slice(0, 2).toUpperCase()}
-                </div>
-                <div style={{ fontSize: "0.95rem", fontWeight: 700, color: "#111", marginBottom: 4 }}>{nome}</div>
-                <div style={{ fontSize: "0.78rem", color: "#8a2236", textTransform: "uppercase", letterSpacing: 0.5 }}>{ruolo}</div>
-              </div>
-            </AnimCard>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ── Staff tecnico ── */
-function StaffTecnico() {
-  return (
-    <section id="staff-tecnico" style={{ padding: "100px 24px", background: "#ffffff" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-        <SectionHeading eyebrow="In panchina" title="Staff tecnico" />
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(220px,1fr))", gap: 16 }}>
-          {STAFF_TECNICO.map(({ nome, ruolo }, i) => (
-            <AnimCard key={nome} delay={i * 0.08}>
-              <div style={{ background: "#f7f5f4", border: "1px solid rgba(111,29,43,0.25)", borderRadius: 16, padding: "26px 18px", textAlign: "center" }}>
-                <div style={{ width: 56, height: 56, borderRadius: "50%", margin: "0 auto 14px", background: "linear-gradient(135deg,#6f1d2b,#4f1218)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Playfair Display',serif", fontWeight: 900, fontSize: "1.05rem", color: "#ff9d9d", border: "1px solid rgba(255,255,255,0.1)" }}>
-                  {nome.split(" ").map((p) => p[0]).join("").slice(0, 2).toUpperCase()}
-                </div>
-                <div style={{ fontSize: "0.95rem", fontWeight: 700, color: "#111", marginBottom: 4 }}>{nome}</div>
-                <div style={{ fontSize: "0.78rem", color: "#8a2236", textTransform: "uppercase", letterSpacing: 0.5 }}>{ruolo}</div>
-              </div>
-            </AnimCard>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+/* ── Roster M/F ── */
+/* ── Funzione di supporto per verificare URL/Percorsi validi ── */
+function isValidImageUrl(url?: string): boolean {
+  if (!url) return false;
+  const trimmed = url.trim();
+  if (trimmed === "") return false;
+  // Deve essere un percorso locale relativo che inizia con / (es. /img/foto.jpg)
+  // oppure un link web valido (es. http:// o https://)
+  return trimmed.startsWith("/") || trimmed.startsWith("http://") || trimmed.startsWith("https://");
 }
 
 /* ── Roster M/F ── */
 function Roster() {
   const [tab, setTab] = useState<"femminile" | "maschile">("femminile");
   const list = ROSTER[tab];
+
   return (
     <section id="roster" style={{ padding: "100px 24px", background: "#ffffff" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
@@ -368,16 +352,27 @@ function Roster() {
           <p style={{ color: "rgba(0,0,0,0.45)", fontSize: "0.9rem" }}>Rosa {tab} in aggiornamento — disponibile a breve.</p>
         ) : (
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(160px,1fr))", gap: 16 }}>
-            {list.map((name, i) => (
-              <AnimCard key={name} delay={(i % 8) * 0.05}>
-                <div style={{ background: "#f7f5f4", border: "1px solid rgba(0,0,0,0.08)", borderRadius: 16, padding: "24px 16px", textAlign: "center" }}>
-                  <div style={{ width: 56, height: 56, borderRadius: "50%", margin: "0 auto 14px", background: "linear-gradient(135deg,#6f1d2b,#4f1218)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Playfair Display',serif", fontWeight: 900, fontSize: "1.1rem", color: "#ff9d9d", border: "1px solid rgba(255,255,255,0.1)" }}>
-                    {name.replace(".", "").split(" ").map((p) => p[0]).join("").toUpperCase()}
+            {list.map((atleta, i) => {
+              const initials = atleta.name.replace(".", "").split(" ").map((p) => p[0]).join("").toUpperCase();
+              const hasValidImage = isValidImageUrl(atleta.image);
+
+              return (
+                <AnimCard key={atleta.name} delay={(i % 8) * 0.05}>
+                  <div style={{ background: "#f7f5f4", border: "1px solid rgba(0,0,0,0.08)", borderRadius: 16, padding: "24px 16px", textAlign: "center" }}>
+                    <div style={{ position: "relative", width: 64, height: 64, borderRadius: "50%", margin: "0 auto 14px", overflow: "hidden", background: "linear-gradient(135deg,#6f1d2b,#4f1218)", border: "2px solid rgba(138, 34, 54, 0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      {hasValidImage ? (
+                        <Image src={atleta.image!} alt={atleta.name} fill style={{ objectFit: "cover" }} />
+                      ) : (
+                        <span style={{ fontFamily: "'Playfair Display',serif", fontWeight: 900, fontSize: "1.1rem", color: "#ff9d9d" }}>
+                          {initials}
+                        </span>
+                      )}
+                    </div>
+                    <div style={{ fontSize: "0.92rem", fontWeight: 600, color: "#111" }}>{atleta.name}</div>
                   </div>
-                  <div style={{ fontSize: "0.92rem", fontWeight: 600, color: "#111" }}>{name}</div>
-                </div>
-              </AnimCard>
-            ))}
+                </AnimCard>
+              );
+            })}
           </div>
         )}
       </div>
@@ -391,7 +386,7 @@ function setWinnerIsHome(setScore: string) {
   return a > b;
 }
 
-/* ── Calendario: Stagione 2026/2027 (classifica + risultati + prossime) ── */
+/* ── Calendario: Stagione 2026/2027 ── */
 function Calendario() {
   return (
     <section id="calendario" style={{ padding: "100px 24px", background: "#ffffff" }}>
@@ -473,9 +468,9 @@ function Calendario() {
                   <span style={{ color: "rgba(0,0,0,0.35)" }}>vs</span>
                   <span style={{ fontWeight: trasferta.toLowerCase().includes("trapani volley") ? 700 : 500, color: trasferta.toLowerCase().includes("trapani volley") ? "#111" : "rgba(0,0,0,0.65)" }}>{trasferta}</span>
                 </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: "0.82rem", color: "rgba(0,0,0,0.55)" }}>
-                  <span>🕒 {ora}</span>
-                  <span>📍 {luogo}</span>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, color: "rgba(0,0,0,0.5)", borderTop: "1px solid rgba(0,0,0,0.06)", paddingTop: 12 }}>
+                  <span>{ora}</span>
+                  <span>{luogo}</span>
                 </div>
               </div>
             </AnimCard>
@@ -489,43 +484,43 @@ function Calendario() {
 /* ── Giovanili ── */
 function Giovanili() {
   return (
-    <section id="giovanili" style={{ padding: "100px 24px", background: "#4f1218", position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", inset: 0, zIndex: 0, backgroundImage: "url('/img/fumogeno.jpg')", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.18 }} />
-      <div style={{ position: "absolute", inset: 0, zIndex: 0, background: "linear-gradient(180deg, #4f1218 0%, rgba(79,18,24,0.75) 50%, #4f1218 100%)" }} />
-      <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 1 }}>
-        <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: "uppercase", color: "#ff7676", opacity: 0.8, display: "block", marginBottom: 12 }}>Settore giovanile</span>
-        <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#fff", marginBottom: 48 }}>Giovanili</h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 20 }}>
+    <section id="giovanili" style={{ padding: "100px 24px", background: "#ffffff" }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+        <SectionHeading eyebrow="Il nostro futuro" title="Settore Giovanile" />
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: 24 }}>
           {GIOVANILI.map(({ id, categoria, text }, i) => (
             <AnimCard key={id} delay={i * 0.1}>
-              <div id={id} style={{ background: "rgba(255,255,255,0.055)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 20, padding: "40px 28px", scrollMarginTop: 100 }}>
-                <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.25rem", fontWeight: 700, color: "#fff", marginBottom: 10 }}>{categoria}</h3>
-                <p style={{ fontSize: "0.88rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.75, margin: 0 }}>{text}</p>
+              <div style={{ background: "#f7f5f4", border: "1px solid rgba(0,0,0,0.08)", borderRadius: 20, padding: "32px 28px" }}>
+                <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.4rem", fontWeight: 700, color: "#6f1d2b", marginBottom: 12 }}>
+                  {categoria}
+                </h3>
+                <p style={{ fontSize: "0.98rem", color: "rgba(20,20,20,0.7)", lineHeight: 1.7 }}>
+                  {text}
+                </p>
               </div>
             </AnimCard>
           ))}
         </div>
-        <p style={{ marginTop: 24, fontSize: "0.8rem", color: "rgba(255,255,255,0.4)" }}>
-          Aggiungi qui tutte le altre categorie giovanili del club (es. Under 14, minivolley, ecc.).
-        </p>
       </div>
     </section>
   );
 }
 
+/* ── Main Page Export ── */
 export default function Home() {
   return (
-    <>
+    <main style={{ minHeight: "100vh", background: "#ffffff", color: "#111111" }}>
       <GlobalStyles />
       <Header />
       <Hero />
+      <NewsCarousel />
+      <SponsorMarquee />
       <Storia />
-      <Organigramma />
-      <StaffTecnico />
       <Roster />
       <Calendario />
+      <TvSection />
       <Giovanili />
       <Footer />
-    </>
+    </main>
   );
 }

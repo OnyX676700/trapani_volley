@@ -1,0 +1,71 @@
+// app/components/SponsorMarquee.tsx
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { SPONSOR } from "../data/sponsor";
+
+export default function SponsorMarquee() {
+  // duplichiamo la lista per ottenere il loop infinito senza scatti
+  const loop = [...SPONSOR, ...SPONSOR];
+
+  return (
+    <section style={{ background: "#fff", padding: "80px 0", overflow: "hidden" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px 40px", display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
+        <div>
+          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: "uppercase", color: "#8a2236", display: "block", marginBottom: 12 }}>
+            Insieme a noi
+          </span>
+          <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#6f1d2b" }}>
+            Sponsor &amp; Partner
+          </h2>
+        </div>
+        <Link href="/sponsor" style={{ fontSize: 13, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: "#8a2236", textDecoration: "none", borderBottom: "1px solid rgba(138,34,54,0.4)", paddingBottom: 3 }}>
+          Tutti i partner →
+        </Link>
+      </div>
+
+      <div
+        className="tv-sponsor-viewport"
+        style={{
+          position: "relative",
+          width: "100%",
+          maskImage: "linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent)",
+          WebkitMaskImage: "linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent)",
+        }}
+      >
+        <div className="tv-sponsor-track" style={{ display: "flex", gap: 28, width: "max-content" }}>
+          {loop.map((s, i) => (
+            <div key={`${s.name}-${i}`} className="tv-sponsor-card" style={{ position: "relative", width: 220, height: 130, flexShrink: 0, background: "#f7f5f4", border: "1px solid rgba(0,0,0,0.08)", borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <Image src={s.file} alt={s.name} fill style={{ objectFit: "contain", padding: 20 }} sizes="220px" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <style jsx>{`
+        .tv-sponsor-track {
+          animation: tv-sponsor-scroll 38s linear infinite;
+        }
+        .tv-sponsor-viewport:hover .tv-sponsor-track {
+          animation-play-state: paused;
+        }
+        .tv-sponsor-card {
+          transition: transform 0.25s ease;
+        }
+        .tv-sponsor-card:hover {
+          transform: translateY(-4px);
+        }
+        @keyframes tv-sponsor-scroll {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .tv-sponsor-track {
+            animation: none;
+          }
+        }
+      `}</style>
+    </section>
+  );
+}

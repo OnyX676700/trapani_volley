@@ -64,7 +64,7 @@ function Newsletter() {
             marginBottom: 6,
           }}
         >
-          Resta aggiornato
+          Newsletter
         </h3>
         <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.6)", margin: 0 }}>
           Iscriviti per ricevere risultati e news di Trapani Volley via email.
@@ -148,9 +148,10 @@ export default function Footer() {
             Contatti
           </h3>
           {[
-            ["Email", "info@trapanivolley.it"],
-            ["Tel", "+39 123 456 789"],
-            ["Indirizzo", "Palestra Comunale, Trapani (TP)"],
+            ["Email", "info.trapanivolley@libero.it"],
+            ["Tel", "+39 342 821 4090"],
+            ["Indirizzo", "Via Emilia Romagna 1/B, Trapani (TP)"],
+            ["Partita IVA", "02939130817"],
           ].map(([k, v]) => (
             <p key={k} style={{ fontSize: "0.87rem", color: "rgba(255,255,255,0.62)", marginBottom: 8, lineHeight: 1.6 }}>
               <strong style={{ color: "rgba(255,255,255,0.82)", fontWeight: 600 }}>{k}:</strong> {v}
@@ -209,7 +210,7 @@ export default function Footer() {
 
       <div style={{ textAlign: "center", padding: "20px 0" }}>
         <p style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.3)", margin: 0 }}>
-          © {new Date().getFullYear()} Trapani Volley — Tutti i diritti riservati
+          © {new Date().getFullYear()} Trapani Volley — Associazione Sportiva Dilettantistica senza scopo di lucro. Tutti i diritti riservati.
         </p>
       </div>
     </footer>
