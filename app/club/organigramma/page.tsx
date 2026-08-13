@@ -10,13 +10,13 @@ const ORGANIGRAMMA = [
   { nome: "Rocco Poma", ruolo: "Presidente", file: "/img/staff/Poma.jpg" },
   { nome: "Mimmo Grimaldi", ruolo: "Vicepresidente", file: "/img/staff/Grimaldi.jpg" },
   { nome: "Daniela Del Giudice", ruolo: "Team Manager", file: "/img/staff/DelGiudice.jpg" },
-  { nome: "Salvatore Restuccia", ruolo: "Responsabile Sanitario", file: "/img/staff/Restuccia.jpg" },
-  { nome: "Rino Fontana", ruolo: "Dirigente", file: "/img/staff/Fontana.jpg" },
+  { nome: "Salvatore Restuccia", ruolo: "Responsabile Sanitario", file: "" },
+  { nome: "Rino Fontana", ruolo: "Dirigente", file: "" },
   { nome: "Maurizio Virgilio", ruolo: "Dirigente", file: "/img/staff/Virgilio.jpg" },
   { nome: "Enza Vario", ruolo: "Collaboratrice", file: "/img/staff/Vario.jpg" },
   { nome: "Ignazio Vario", ruolo: "Collaboratore", file: "/img/staff/IVario.jpg" },
   { nome: "Santo Vassallo", ruolo: "Collaboratore", file: "/img/staff/Vassallo.jpg" },
-  { nome: "Francesco Oddo", ruolo: "Grafico & Social Media Manager", file: "/img/staff/Oddo.jpg" },
+  { nome: "Francesco Oddo", ruolo: "Grafico & Social Media Manager", file: "" },
 ];
 
 export default function OrganigrammaPage() {
