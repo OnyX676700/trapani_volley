@@ -24,7 +24,7 @@ export const NAV_STRUCTURE: NavItem[] = [
   },
   {
     label: "Calendario",
-  submenu: [{ label: "Stagione 2025/2026", href: "/calendario" }],
+  submenu: [{ label: "Stagione 2026/2027", href: "/calendario" }],
   },
   {
     label: "Giovanili",
