@@ -16,7 +16,7 @@ export const NAV_STRUCTURE: NavItem[] = [
   {
     label: "Club",
     submenu: [
-      { label: "Storia", href: "/#storia" },
+      { label: "Storia", href: "/club/storia" },
       { label: "Organigramma", href: "../club/organigramma" },
       { label: "Staff tecnico", href: "../club/staff-tecnico" },
       { label: "Roster M/F", href: "/#roster" },
@@ -24,13 +24,13 @@ export const NAV_STRUCTURE: NavItem[] = [
   },
   {
     label: "Calendario",
-    submenu: [{ label: "Stagione 2026/2027", href: "/#calendario" }],
+  submenu: [{ label: "Stagione 2025/2026", href: "/calendario" }],
   },
   {
     label: "Giovanili",
     submenu: [
-      { label: "Under 12-13-14-15-17 F", href: "/#giovanili" },
-      { label: "Under 17 M", href: "/#giovanili" },
+    { label: "Under 12-13-14-15-17 F", href: "/giovanili/femminili" },
+    { label: "Under 17 M", href: "/giovanili/maschili" },
     ],
   },
   { label: "Sponsor & Partner", href: "/sponsor" },
