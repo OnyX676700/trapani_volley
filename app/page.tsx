@@ -272,7 +272,7 @@ function Roster() {
                         fontFamily: "'Playfair Display',serif",
                         fontSize: "1.5rem",
                         fontWeight: 900,
-                        color: "rgba(255,255,255,0.85)",
+                        color: "var(--color-granata-dark)",
                         textShadow: "0 2px 8px rgba(0,0,0,0.6)"
                       }}
                     >

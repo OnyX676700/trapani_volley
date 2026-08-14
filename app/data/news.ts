@@ -13,13 +13,13 @@ export type NewsItem = {
 
 export const NEWS: NewsItem[] = [
   {
-    slug: "destinazione-raggiunta",
+    slug: "nuove-maglie-ufficiali",
     featured: true,
     badge: "In evidenza",
-    date: "Domenica 11 Maggio 2025",
-    title: "Destinazione raggiunta! 🏆",
-    text: "La squadra festeggia con medaglie al collo e spumante in campo.",
-    img: "/img/spumante.jpg",
+    date: "Venerdì 14 Agosto 2026",
+    title: "Nuove maglie ufficiali!",
+    text: "Il Rosone di Sant’Agostino: un simbolo di Trapani",
+    img: "/img/maglia.jpg",
   },
   {
     slug: "allenamento-speciale",
@@ -29,10 +29,10 @@ export const NEWS: NewsItem[] = [
     img: "/img/fumogeno.jpg",
   },
   {
-    slug: "nuove-maglie-ufficiali",
+    slug: "destinazione-raggiunta",
     date: "Martedì 6 Maggio 2025",
-    title: "Nuove maglie ufficiali",
-    text: "Presentate le nuove divise per la stagione in corso.",
+    title: "Destinazione raggiunta!",
+    text: "La squadra festeggia con medaglie al collo e spumante in campo.",
     img: "/img/trofeo.jpg",
   },
 ];
