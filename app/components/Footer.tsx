@@ -2,7 +2,12 @@
 import Link from "next/link";
 import { useState } from "react";
 import Logo from "./Logo";
-import { FaTiktok, FaYoutube, FaFacebook, FaInstagram } from "react-icons/fa";
+import { FaTiktok, FaYoutube, FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
+
+// Numero di contatto usato anche nella sezione "Contatti" qui sotto.
+// Il link WhatsApp è generato da questo stesso numero: se cambia, aggiornalo solo qui.
+const PHONE_DISPLAY = "+39 342 821 4090";
+const PHONE_WHATSAPP = PHONE_DISPLAY.replace(/[^\d]/g, ""); // es. 393428214090
 
 const socialLinks = [
   {
@@ -149,7 +154,6 @@ export default function Footer() {
           </h3>
           {[
             ["Email", "info.trapanivolley@libero.it"],
-            ["Tel", "+39 342 821 4090"],
             ["Indirizzo", "Via Emilia Romagna 1/B, Trapani (TP)"],
             ["Partita IVA", "02939130817"],
           ].map(([k, v]) => (
@@ -157,6 +161,29 @@ export default function Footer() {
               <strong style={{ color: "rgba(255,255,255,0.82)", fontWeight: 600 }}>{k}:</strong> {v}
             </p>
           ))}
+          <p style={{ fontSize: "0.87rem", color: "rgba(255,255,255,0.62)", marginBottom: 8, lineHeight: 1.6, display: "flex", alignItems: "center", gap: 8 }}>
+            <strong style={{ color: "rgba(255,255,255,0.82)", fontWeight: 600 }}>Tel:</strong> {PHONE_DISPLAY}
+            <a
+              href={`https://wa.me/${PHONE_WHATSAPP}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Scrivici su WhatsApp"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 22,
+                height: 22,
+                borderRadius: "50%",
+                background: "rgba(37,211,102,0.16)",
+                border: "1px solid rgba(37,211,102,0.35)",
+                color: "#25D366",
+                flexShrink: 0,
+              }}
+            >
+              <FaWhatsapp size={13} />
+            </a>
+          </p>
         </div>
 
         <div>
@@ -180,7 +207,7 @@ export default function Footer() {
           <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: "1rem", fontWeight: 700, marginBottom: 18, color: "#fff" }}>
             Seguici
           </h3>
-          <div style={{ display: "flex", gap: 12 }}>
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
             {socialLinks.map(({ href, label, icon: Icon }) => (
               <a
                 key={label}
@@ -194,10 +221,10 @@ export default function Footer() {
                   justifyContent: "center",
                   width: 42,
                   height: 42,
-                  background: "rgba(255,255,255,0.08)",
+                  background: label === "WhatsApp" ? "rgba(37,211,102,0.16)" : "rgba(255,255,255,0.08)",
                   borderRadius: "50%",
-                  color: "rgba(255,255,255,0.85)",
-                  border: "1px solid rgba(255,255,255,0.1)",
+                  color: label === "WhatsApp" ? "#25D366" : "rgba(255,255,255,0.85)",
+                  border: label === "WhatsApp" ? "1px solid rgba(37,211,102,0.35)" : "1px solid rgba(255,255,255,0.1)",
                   transition: "background 0.2s, color 0.2s",
                 }}
               >

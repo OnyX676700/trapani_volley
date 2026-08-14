@@ -35,11 +35,44 @@ export default function SponsorMarquee() {
         }}
       >
         <div className="tv-sponsor-track" style={{ display: "flex", gap: 28, width: "max-content" }}>
-          {loop.map((s, i) => (
-            <div key={`${s.name}-${i}`} className="tv-sponsor-card" style={{ position: "relative", width: 220, height: 130, flexShrink: 0, background: "#f7f5f4", border: "1px solid rgba(0,0,0,0.08)", borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <Image src={s.file} alt={s.name} fill style={{ objectFit: "contain", padding: 20 }} sizes="220px" />
-            </div>
-          ))}
+          {loop.map((s, i) => {
+            const card = (
+              <div
+                className="tv-sponsor-card"
+                style={{
+                  position: "relative",
+                  width: 220,
+                  height: 130,
+                  flexShrink: 0,
+                  background: "#f7f5f4",
+                  border: "1px solid rgba(0,0,0,0.08)",
+                  borderRadius: 14,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Image src={s.file} alt={s.name} fill style={{ objectFit: "contain", padding: 20 }} sizes="220px" />
+              </div>
+            );
+
+            return s.url ? (
+              <Link
+                key={`${s.name}-${i}`}
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Vai al sito di ${s.name}`}
+                style={{ display: "block", flexShrink: 0 }}
+              >
+                {card}
+              </Link>
+            ) : (
+              <div key={`${s.name}-${i}`} aria-label={s.name} style={{ flexShrink: 0 }}>
+                {card}
+              </div>
+            );
+          })}
         </div>
       </div>
 

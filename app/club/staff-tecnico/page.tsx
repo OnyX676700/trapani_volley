@@ -8,8 +8,8 @@ import Header from "@/app/components/Header";
 /* ── Dati: Staff tecnico ── */
 const STAFF_TECNICO = [
   { nome: "Piervito Vulpetti", ruolo: "Direttore Tecnico, Coach", file: "/img/staff/Vulpetti.jpg" },
-  { nome: "Andrea Gianno", ruolo: "Coach", file: "/img/staff/Gianno.jpg" },
   { nome: "Giuseppe Oddo", ruolo: "Coach", file: "/img/staff/Oddo.jpg" },
+  { nome: "Giovanni Schifano", ruolo: "Coach", file: "/img/staff/Gianno.jpg" },
   { nome: "Gioacchino Di Bella", ruolo: "Assistant Coach", file: "/img/staff/DiBella.jpg" },
 ];
 

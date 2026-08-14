@@ -21,20 +21,19 @@ const ROSTER: { stagione: string; femminile: Athlete[]; maschile: Athlete[] } = 
   stagione: "2025/2026",
   femminile: [
     { name: "Inglese D.", image: "/img/rosterF/Inglese.jpg" },
-    { name: "La Vecchia A.", image: "/img/rosterF/LaVecchia.jpg" },
-    { name: "Mazzola M.", image: "/img/rosterF/Mazzola.jpg" },
-    { name: "Montalto I.", image: "/img/rosterF/Montalto.jpg" },
-    { name: "Morello A.", image: "/img/rosterF/Morello.jpg" },
-    { name: "Alastra G.", image: "/img/rosterF/Alastra.jpg" },
     { name: "Grimaldi C.", image: "/img/rosterF/GrimaldiC.jpg" },
-    { name: "Di Maggio K.", image: "/img/rosterF/DiMaggio.jpg" },
-    { name: "Lombardo R.", image: "/img/rosterF/LombardoR.jpg" },
-    { name: "Hernandez K.", image: "" },
-    { name: "Oddo M.", image: "" },
-    { name: "Salerno C.", image: "/img/rosterF/Salerno.jpg" },
-    { name: "Goretti V.", image: "/img/rosterF/Goretti.jpg" },
+    { name: "La Vecchia A.", image: "/img/rosterF/LaVecchia.jpg" },
     { name: "Barraco F.", image: "/img/rosterF/Barraco.jpg" },
+    { name: "Cusimano G.", image: "" },
+    { name: "Grimaudo G.", image: "" },
+    { name: "Montalto I.", image: "/img/rosterF/Montalto.jpg" },
+    { name: "Oddo M.", image: "" },
     { name: "Lombardo S.", image: "/img/rosterF/LombardoS.jpg" },
+    { name: "Goretti V.", image: "/img/rosterF/Goretti.jpg" },
+    { name: "Frazzitta A.", image: "" },
+    { name: "Morghese C.", image: "" },
+    { name: "Dell'Utri D.", image: "" },
+    { name: "Fabiano R.", image: "" }, 
   ],
   maschile: [],
 };
@@ -515,10 +514,10 @@ export default function Home() {
       <Hero />
       <NewsCarousel />
       <SponsorMarquee />
+      <TvSection />
       <Storia />
       <Roster />
       <Calendario />
-      <TvSection />
       <Giovanili />
       <Footer />
     </main>

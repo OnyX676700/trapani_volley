@@ -7,16 +7,22 @@ import Header from "@/app/components/Header";
 
 /* ── Dati: Organigramma ── */
 const ORGANIGRAMMA = [
-  { nome: "Rocco Poma", ruolo: "Presidente", file: "/img/staff/Poma.jpg" },
-  { nome: "Mimmo Grimaldi", ruolo: "Vicepresidente", file: "/img/staff/Grimaldi.jpg" },
-  { nome: "Daniela Del Giudice", ruolo: "Team Manager", file: "/img/staff/DelGiudice.jpg" },
-  { nome: "Salvatore Restuccia", ruolo: "Responsabile Sanitario", file: "" },
-  { nome: "Rino Fontana", ruolo: "Dirigente", file: "" },
-  { nome: "Maurizio Virgilio", ruolo: "Dirigente", file: "/img/staff/Virgilio.jpg" },
-  { nome: "Enza Vario", ruolo: "Collaboratrice", file: "/img/staff/Vario.jpg" },
-  { nome: "Ignazio Vario", ruolo: "Collaboratore", file: "/img/staff/IVario.jpg" },
-  { nome: "Santo Vassallo", ruolo: "Collaboratore", file: "/img/staff/Vassallo.jpg" },
-  { nome: "Francesco Oddo", ruolo: "Grafico & Social Media Manager", file: "" },
+  { nome: "Rocco Poma", ruolo: "Presidente", image: "/img/staff/Poma.jpg" },
+  { nome: "Mimmo Grimaldi", ruolo: "Vicepresidente", image: "/img/staff/Grimaldi.jpg" },
+  { nome: "Daniela Del Giudice", ruolo: "Team Manager", image: "/img/staff/DelGiudice.jpg" },
+  { nome: "Rino Fontana", ruolo: "Dirigente", image: "" },
+  { nome: "Maurizio Virgilio", ruolo: "Dirigente", image: "/img/staff/Virgilio.jpg" },
+  { nome: "Enza Vario", ruolo: "Collaboratrice", image: "/img/staff/Vario.jpg" },
+  { nome: "Ignazio Vario", ruolo: "Collaboratore", image: "/img/staff/IVario.jpg" },
+  { nome: "Santo Vassallo", ruolo: "Collaboratore", image: "/img/staff/Vassallo.jpg" },
+  { nome: "Francesco Oddo", ruolo: "Grafico & Social Media Manager", image: "" },
+  { nome: "Paolo Mangiapane", ruolo: "Preparatore atletico", image: "" },
+  
+  
+  
+  
+  
+  
 ];
 
 export default function OrganigrammaPage() {
@@ -36,7 +42,7 @@ export default function OrganigrammaPage() {
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: 24 }}>
-          {ORGANIGRAMMA.map(({ ruolo, nome, file }) => (
+          {ORGANIGRAMMA.map(({ ruolo, nome, image }) => (
             <div
               key={nome} /* Usa 'nome' come key per evitare duplicati */
               style={{
@@ -51,7 +57,7 @@ export default function OrganigrammaPage() {
             >
               {/* Foto Membro */}
               <div style={{ position: "relative", width: 64, height: 64, borderRadius: "50%", overflow: "hidden", flexShrink: 0, background: "#e0e0e0" }}>
-                <Image src={file} alt={nome} fill style={{ objectFit: "cover" }} />
+                <Image src={image} alt={nome} fill style={{ objectFit: "cover" }} />
               </div>
 
               <div>
