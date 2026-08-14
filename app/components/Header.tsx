@@ -19,7 +19,7 @@ export const NAV_STRUCTURE: NavItem[] = [
       { label: "Storia", href: "/club/storia" },
       { label: "Organigramma", href: "../club/organigramma" },
       { label: "Staff tecnico", href: "../club/staff-tecnico" },
-      { label: "Roster M/F", href: "/#roster" },
+      { label: "Roster M/F", href: "/roster" },
     ],
   },
   {
