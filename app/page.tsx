@@ -8,37 +8,7 @@ import GlobalStyles from "./components/GlobalStyles";
 import NewsCarousel from "./components/NewsCarousel";
 import SponsorMarquee from "./components/SponsorMarquee";
 import TvSection from "./components/TvSection";
-
-/* ── Tipo Atleta (Stile Serie A / Imoco) ── */
-interface Athlete {
-  number?: string | number;
-  name: string;        // Nome
-  surname: string;     // Cognome
-  role: string;        // Ruolo (es. Schiacciatrice, Libero, Palleggiatrice)
-  image?: string;
-}
-
-/* ── Dati: Roster femminile/maschile ── */
-const ROSTER: { stagione: string; femminile: Athlete[]; maschile: Athlete[] } = {
-  stagione: "2026/2027",
-  femminile: [
-    { number: "1", name: "Daniela", surname: "Inglese", role: "Palleggiatrice", image: "/img/rosterF/Inglese.jpg" },
-    { number: "2", name: "Chiara", surname: "Grimaldi", role: "Libero", image: "/img/rosterF/GrimaldiC.jpg" },
-    { number: "3", name: "Arianna", surname: "La Vecchia", role: "Schiacciatrice", image: "/img/rosterF/LaVecchia.jpg" },
-    { number: "4", name: "Federica", surname: "Barraco", role: "Schiacciatrice", image: "/img/rosterF/Barraco.jpg" },
-    { number: "5", name: "Giulia", surname: "Cusimano", role: "Opposto", image: "" },
-    { number: "6", name: "Greta", surname: "Grimaudo", role: "", image: "" },
-    { number: "7", name: "Ilenia", surname: "Montalto", role: "Centrale", image: "/img/rosterF/Montalto.jpg" },
-    { number: "8", name: "Maria", surname: "Oddo", role: "Opposto", image: "" },
-    { number: "9", name: "Sabrina", surname: "Lombardo", role: "Schiacciatrice", image: "/img/rosterF/LombardoS.jpg" },
-    { number: "10", name: "Valentina", surname: "Goretti", role: "Centrale", image: "/img/rosterF/Goretti.jpg" },
-    { number: "11", name: "Alessandra", surname: "Frazzitta", role: "", image: "" },
-    { number: "12", name: "Claudia", surname: "Morghese", role: "", image: "" },
-    { number: "13", name: "Deborah", surname: "Dell'Utri", role: "Schiacciatrice", image: "" },
-    { number: "14", name: "Rossella", surname: "Fabiano", role: "Palleggiatrice", image: "" },
-  ],
-  maschile: [],
-};
+import { ROSTER } from "./data/roster";
 
 /* ── Hero ── */
 function Hero() {
@@ -115,11 +85,25 @@ function Roster() {
         {/* Header Sezione Responsive */}
         <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 16, marginBottom: 28 }}>
           <div>
-            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 2.5, textTransform: "uppercase", color: "#ff7676", display: "block", marginBottom: 6 }}>
-              Rosa {ROSTER.stagione}
-            </span>
+            <a
+              href="/roster"
+              style={{
+                fontSize: 10,
+                fontWeight: 700,
+                letterSpacing: 2.5,
+                textTransform: "uppercase",
+                color: "#ff7676",
+                display: "inline-block",
+                marginBottom: 6,
+                textDecoration: "none",
+                borderBottom: "1px solid rgba(255,118,118,0.4)",
+                paddingBottom: 2,
+              }}
+            >
+              Roster completo →
+            </a>
             <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(1.8rem,5vw,3rem)", fontWeight: 900, color: "#ffffff", margin: 0 }}>
-              First Team
+              Roster 
             </h2>
           </div>
 

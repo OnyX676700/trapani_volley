@@ -5,42 +5,7 @@ import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import GlobalStyles from "../components/GlobalStyles";
-
-/* ── Tipo Atleta ── */
-interface Athlete {
-  number?: string | number;
-  name: string;
-  surname: string;
-  role: string;
-  image?: string;
-}
-
-/* ── Dati Roster ── */
-const ROSTER: { stagione: string; femminile: Athlete[]; maschile: Athlete[] } = {
-  stagione: "2026/2027",
-  femminile: [
-    { number: "1", name: "Daniela", surname: "Inglese", role: "Palleggiatrice", image: "/img/rosterF/Inglese.jpg" },
-    { number: "12", name: "Claudia", surname: "Morghese", role: "Palleggiatrice", image: "" },
-    { number: "3", name: "Arianna", surname: "La Vecchia", role: "Schiacciatrice", image: "/img/rosterF/LaVecchia.jpg" },
-    { number: "4", name: "Federica", surname: "Barraco", role: "Schiacciatrice", image: "/img/rosterF/Barraco.jpg" },
-    { number: "9", name: "Sabrina", surname: "Lombardo", role: "Schiacciatrice", image: "/img/rosterF/LombardoS.jpg" },
-    { number: "15", name: "Michela", surname: "Mazzola", role: "Schiacciatrice", image: "/img/rosterF/Mazzola.jpg" },
-    { number: "13", name: "Deborah", surname: "Dell'Utri", role: "Schiacciatrice", image: "" },
-    { number: "7", name: "Ilenia", surname: "Montalto", role: "Centrale", image: "/img/rosterF/Montalto.jpg" },
-    { number: "10", name: "Valentina", surname: "Goretti", role: "Centrale", image: "/img/rosterF/Goretti.jpg" },
-    { number: "14", name: "Rossella", surname: "Fabiano", role: "Centrale", image: "" },
-    { number: "5", name: "Giulia", surname: "Cusimano", role: "Opposto", image: "" },
-    { number: "8", name: "Maria", surname: "Oddo", role: "Opposto", image: "" },
-    { number: "2", name: "Chiara", surname: "Grimaldi", role: "Libero", image: "/img/rosterF/GrimaldiC.jpg" },
-    { number: "6", name: "Greta", surname: "Grimaudo", role: "In attesa di ruolo", image: "" },
-    { number: "11", name: "Alessandra", surname: "Frazzitta", role: "In attesa di ruolo", image: "" },
-    
-  ],
-  maschile: [],
-};
-
-// Ordine visualizzazione dei ruoli
-const ROLE_ORDER = ["Palleggiatrice", "Schiacciatrice", "Centrale", "Opposto", "Libero"];
+import { ROSTER, ROLE_ORDER, type Athlete } from "../data/roster";
 
 function isValidImageUrl(url?: string): boolean {
   if (!url) return false;

@@ -48,7 +48,7 @@ export default function NewsCarousel() {
         </div>
 
         {/* Slide principale */}
-        <div style={{ position: "relative", borderRadius: 24, overflow: "hidden", aspectRatio: "16/8", boxShadow: "0 30px 70px rgba(0,0,0,0.45)" }} className="tv-news-slide">
+        <div style={{ position: "relative", borderRadius: 24, overflow: "hidden", aspectRatio: "16/8", boxShadow: "0 30px 70px rgba(0,0,0,0.45)", background: "#000" }} className="tv-news-slide">
           {NEWS.map((item, i) => (
             <div
               key={item.slug}
@@ -60,7 +60,24 @@ export default function NewsCarousel() {
                 pointerEvents: i === index ? "auto" : "none",
               }}
             >
-              <Image src={item.img} alt={item.title} fill priority={i === 0} style={{ objectFit: "cover" }} sizes="(max-width: 900px) 100vw, 1200px" />
+              {/* Sfondo sfocato: riempie tutto il riquadro senza lasciare bande vuote */}
+              <Image
+                src={item.img}
+                alt=""
+                fill
+                aria-hidden="true"
+                style={{ objectFit: "cover", filter: "blur(28px) brightness(0.55) saturate(1.2)", transform: "scale(1.15)" }}
+                sizes="(max-width: 900px) 100vw, 1200px"
+              />
+              {/* Immagine reale: sempre intera, mai tagliata */}
+              <Image
+                src={item.img}
+                alt={item.title}
+                fill
+                priority={i === 0}
+                style={{ objectFit: "contain" }}
+                sizes="(max-width: 900px) 100vw, 1200px"
+              />
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(0deg, rgba(10,4,5,0.92) 0%, rgba(10,4,5,0.35) 55%, rgba(10,4,5,0.1) 100%)" }} />
               <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "36px 40px" }}>
                 {item.badge && (

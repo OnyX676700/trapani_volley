@@ -34,25 +34,29 @@ export default function SponsorMarquee() {
           WebkitMaskImage: "linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent)",
         }}
       >
-        <div className="tv-sponsor-track" style={{ display: "flex", gap: 28, width: "max-content" }}>
+        <div className="tv-sponsor-track" style={{ display: "flex", gap: 36, width: "max-content" }}>
           {loop.map((s, i) => {
             const card = (
               <div
                 className="tv-sponsor-card"
                 style={{
                   position: "relative",
-                  width: 220,
-                  height: 130,
+                  width: "clamp(210px, 22vw, 300px)",
+                  height: "clamp(150px, 15vw, 200px)",
                   flexShrink: 0,
-                  background: "#f7f5f4",
+                  background: "#ffffff",
                   border: "1px solid rgba(0,0,0,0.08)",
-                  borderRadius: 14,
+                  borderRadius: 18,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  boxShadow: "0 8px 28px rgba(0,0,0,0.07)",
+                  padding: "6%",
                 }}
               >
-                <Image src={s.file} alt={s.name} fill style={{ objectFit: "contain", padding: 20 }} sizes="220px" />
+                <div style={{ position: "relative", width: "100%", height: "100%" }}>
+                  <Image src={s.file} alt={s.name} fill style={{ objectFit: "contain" }} sizes="(max-width: 640px) 210px, 300px" />
+                </div>
               </div>
             );
 
@@ -78,16 +82,17 @@ export default function SponsorMarquee() {
 
       <style jsx>{`
         .tv-sponsor-track {
-          animation: tv-sponsor-scroll 38s linear infinite;
+          animation: tv-sponsor-scroll 42s linear infinite;
         }
         .tv-sponsor-viewport:hover .tv-sponsor-track {
           animation-play-state: paused;
         }
         .tv-sponsor-card {
-          transition: transform 0.25s ease;
+          transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
         .tv-sponsor-card:hover {
           transform: translateY(-4px);
+          box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12);
         }
         @keyframes tv-sponsor-scroll {
           from { transform: translateX(0); }
