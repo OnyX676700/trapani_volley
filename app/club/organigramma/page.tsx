@@ -16,7 +16,7 @@ const ORGANIGRAMMA = [
   { nome: "Ignazio Vario", ruolo: "Collaboratore", image: "/img/staff/IVario.jpg" },
   { nome: "Santo Vassallo", ruolo: "Collaboratore", image: "/img/staff/Vassallo.jpg" },
   { nome: "Francesco Oddo", ruolo: "Grafico & Social Media Manager", image: "" },
-  { nome: "Paolo Mangiapane", ruolo: "Preparatore atletico", image: "" },
+
   
   
   
