@@ -1,7 +1,4 @@
 // app/club/staff-tecnico/page.tsx
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Footer from "@/app/components/Footer";
@@ -11,21 +8,22 @@ import { STAFF_TECNICO, slugifyStaff } from "@/app/data/staff";
 
 /* ── Staff tecnico ── */
 export default function StaffTecnicoPage() {
-  const [hovered, setHovered] = useState<string | null>(null);
-
   return (
     <main style={{ minHeight: "100vh", background: "#ffffff", color: "#111111" }}>
       <GlobalStyles />
       <Header />
 
+      {/* Hero */}
       <section
         style={{
-          padding: "140px 24px 100px",
-          maxWidth: 1100,
-          margin: "0 auto",
+          paddingTop: 140,
+          paddingBottom: 40,
+          textAlign: "center",
+          background: "#f7f5f4",
+          borderBottom: "1px solid rgba(0,0,0,0.08)",
         }}
       >
-        <div style={{ marginBottom: 56, textAlign: "center" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 16px" }}>
           <span
             style={{
               fontSize: 11,
@@ -34,7 +32,7 @@ export default function StaffTecnicoPage() {
               textTransform: "uppercase",
               color: "#8a2236",
               display: "block",
-              marginBottom: 12,
+              marginBottom: 8,
             }}
           >
             Guida Tecnica
@@ -42,143 +40,98 @@ export default function StaffTecnicoPage() {
           <h1
             style={{
               fontFamily: "'Playfair Display',serif",
-              fontSize: "clamp(2.5rem,5vw,3.5rem)",
-              fontWeight: 700,
+              fontSize: "clamp(2.5rem, 6vw, 4rem)",
+              fontWeight: 900,
               color: "#6f1d2b",
-              lineHeight: 1.15,
               margin: 0,
             }}
           >
             Staff Tecnico
           </h1>
-          <div
-            style={{
-              width: 60,
-              height: 3,
-              background: "#8a2236",
-              margin: "20px auto 0",
-              borderRadius: 2,
-            }}
-          />
         </div>
+      </section>
 
+      {/* Griglia Staff */}
+      <section style={{ padding: "60px 16px", maxWidth: 1200, margin: "0 auto" }}>
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))",
-            gap: 28,
+            gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+            gap: 20,
           }}
         >
-          {STAFF_TECNICO.map(({ ruolo, nome, file }) => {
-            const isHovered = hovered === nome;
-            return (
-              <Link
-                key={nome}
-                href={`/club/staff-tecnico/${slugifyStaff(nome)}`}
-                onMouseEnter={() => setHovered(nome)}
-                onMouseLeave={() => setHovered(null)}
+          {STAFF_TECNICO.map(({ ruolo, nome, file }) => (
+            <Link
+              key={nome}
+              href={`/club/staff-tecnico/${slugifyStaff(nome)}`}
+              style={{
+                position: "relative",
+                height: 330,
+                borderRadius: 16,
+                overflow: "hidden",
+                background: "linear-gradient(180deg, #2a0b12 0%, #120407 100%)",
+                border: "1px solid rgba(0,0,0,0.08)",
+                boxShadow: "0 8px 20px rgba(0,0,0,0.12)",
+                display: "block",
+                textDecoration: "none",
+                color: "inherit",
+              }}
+            >
+              {/* Foto */}
+              <Image
+                src={file}
+                alt={nome}
+                fill
+                sizes="(max-width: 768px) 50vw, 260px"
+                style={{ objectFit: "cover", objectPosition: "top center" }}
+              />
+
+              {/* Sfumatura testo */}
+              <div
                 style={{
-                  position: "relative",
-                  background: "#f7f5f4",
-                  border: "1px solid rgba(0,0,0,0.08)",
-                  borderRadius: 20,
-                  padding: "28px",
-                  display: "flex",
-                  gap: 20,
-                  alignItems: "center",
-                  textDecoration: "none",
-                  color: "inherit",
-                  overflow: "hidden",
-                  transform: isHovered ? "translateY(-4px)" : "translateY(0)",
-                  boxShadow: isHovered
-                    ? "0 16px 32px rgba(111,29,43,0.16)"
-                    : "0 1px 2px rgba(0,0,0,0.03)",
-                  borderColor: isHovered
-                    ? "rgba(138,34,54,0.35)"
-                    : "rgba(0,0,0,0.08)",
-                  transition:
-                    "transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease",
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "linear-gradient(to top, rgba(15, 6, 8, 0.95) 0%, rgba(15, 6, 8, 0.2) 60%, transparent 100%)",
                 }}
-              >
-                {/* Foto dello Staff */}
-                <div
+              />
+
+              {/* Info Nome + ruoli */}
+              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "16px 14px" }}>
+                <h3
                   style={{
-                    position: "relative",
-                    width: 84,
-                    height: 84,
-                    borderRadius: "50%",
-                    overflow: "hidden",
-                    flexShrink: 0,
-                    background: "#e0e0e0",
-                    border: "3px solid #ffffff",
-                    boxShadow: isHovered
-                      ? "0 0 0 3px rgba(138,34,54,0.4)"
-                      : "0 0 0 3px rgba(0,0,0,0.06)",
-                    transition: "box-shadow 0.25s ease",
+                    fontFamily: "'Playfair Display',serif",
+                    fontSize: "1.15rem",
+                    fontWeight: 700,
+                    color: "#ffffff",
+                    margin: "0 0 10px",
+                    lineHeight: 1.2,
                   }}
                 >
-                  <Image
-                    src={file}
-                    alt={nome}
-                    fill
-                    sizes="84px"
-                    style={{
-                      objectFit: "cover",
-                      transform: isHovered ? "scale(1.08)" : "scale(1)",
-                      transition: "transform 0.3s ease",
-                    }}
-                  />
+                  {nome}
+                </h3>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                  {ruolo.split(", ").map((r) => (
+                    <span
+                      key={r}
+                      style={{
+                        fontSize: "0.72rem",
+                        fontWeight: 700,
+                        color: "#ff7676",
+                        background: "rgba(255,118,118,0.15)",
+                        padding: "3px 9px",
+                        borderRadius: 6,
+                        textTransform: "uppercase",
+                        letterSpacing: 0.5,
+                      }}
+                    >
+                      {r}
+                    </span>
+                  ))}
                 </div>
-
-                <div style={{ minWidth: 0 }}>
-                  <div
-                    style={{
-                      fontFamily: "'Playfair Display',serif",
-                      fontSize: "1.3rem",
-                      fontWeight: 700,
-                      color: isHovered ? "#6f1d2b" : "#111111",
-                      marginBottom: 8,
-                      transition: "color 0.25s ease",
-                    }}
-                  >
-                    {nome}
-                  </div>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                    {ruolo.split(", ").map((r) => (
-                      <span
-                        key={r}
-                        style={{
-                          fontSize: "0.8rem",
-                          fontWeight: 600,
-                          color: "#8a2236",
-                          background: "rgba(255,118,118,0.12)",
-                          padding: "4px 10px",
-                          borderRadius: 6,
-                        }}
-                      >
-                        {r}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Freccia indicativa al hover */}
-                <span
-                  style={{
-                    marginLeft: "auto",
-                    fontSize: "1.4rem",
-                    color: "#8a2236",
-                    opacity: isHovered ? 1 : 0,
-                    transform: isHovered ? "translateX(0)" : "translateX(-6px)",
-                    transition: "opacity 0.25s ease, transform 0.25s ease",
-                    flexShrink: 0,
-                  }}
-                >
-                  →
-                </span>
-              </Link>
-            );
-          })}
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 

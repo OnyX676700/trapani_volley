@@ -45,7 +45,7 @@ export const STAFF_TECNICO: StaffMember[] = [
   {
     nome: "Paolo Mangiapane",
     ruolo: "Preparatore atletico",
-    file: "/img/staff/Mangiapane.jpg",
+    file: "/img/staff/PaoloMangiapane.jpg",
     bio: "Percorso costruito sul campo, tra risultati e formazione continua. Doppia laurea in Scienze Motorie: triennale a Perugia e magistrale in Scienze e Tecniche dello Sport (2025). Tripla certificazione ELAV: Sport Performance, Esperto Fitness e Rieducatore Funzionale. Esperienza multi-sport ad alto livello. Un percorso trasversalite: preparazione atletica in calcio, volley e basket, spesso in contemporanea, con squadre di categoria e settori giovanili strutturati. Calcio: allenatore in scuola calcio a Roma; dal settembre 2020, dopo il rientro a Trapani, collaborazioni con squadre di calcio del territorio; dal 2023/24 esperienza nello staff dell'Under 15 nazionale del Trapani Calcio (Serie C). Volley: da dicembre 2022 primo incarico come preparatore all'Ericina Volley (B2); dal 2023/24 anche alla Fenice Volley (Serie C), con promozione e Coppa Sicilia nella stessa stagione; dal 2024/25 in staff al Marsala Volley (Serie B1 e A2), con salvezza raggiunta e riconferma. Basket: dall'estate 2023 con i Trapani Shark, come preparatore della prima squadra e responsabile dell'intero settore giovanile (Under 13–Under 17); stagione 23/24 con vittoria di Supercoppa e campionato di A2."
   },
 ];
