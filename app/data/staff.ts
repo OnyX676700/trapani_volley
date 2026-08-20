@@ -37,15 +37,16 @@ export const STAFF_TECNICO: StaffMember[] = [
     ruolo: "Coach",
     file: "/img/staff/Gianno.jpg",
   },
-  {
+    {
     nome: "Gioacchino Di Bella",
     ruolo: "Assistant Coach",
     file: "/img/staff/DiBella.jpg",
+    bio: "Gioacchino Di Bella vanta una lunga esperienza nel mondo della pallavolo, iniziata negli anni '80 con la C.C.P. Clambra, dove ha completato il percorso nel settore giovanile fino ad arrivare al debutto in Prima Squadra.\n\nNel corso della sua carriera da giocatore ha vestito le maglie di Volley Paceco, Polisportiva Valderice, Pallavolo Trapani, Fortitudo Buseto ed Entello Volley, disputando diversi campionati di Serie C e Serie D.\n\nIl suo percorso sportivo gli ha permesso di maturare una solida conoscenza tecnica e tattica della pallavolo, oltre a una significativa esperienza sul campo e una profonda cultura sportiva.\n\nPer la stagione 2026/2027 entra a far parte dello staff tecnico del Trapani Volley, ricoprendo il ruolo di Assistant Coach della Prima Squadra Femminile, mettendo a disposizione esperienza, competenza e passione al servizio del gruppo.",
   },
   {
     nome: "Paolo Mangiapane",
     ruolo: "Preparatore atletico",
     file: "/img/staff/PaoloMangiapane.jpg",
-    bio: "Percorso costruito sul campo, tra risultati e formazione continua. Doppia laurea in Scienze Motorie: triennale a Perugia e magistrale in Scienze e Tecniche dello Sport (2025). Tripla certificazione ELAV: Sport Performance, Esperto Fitness e Rieducatore Funzionale. Esperienza multi-sport ad alto livello. Un percorso trasversalite: preparazione atletica in calcio, volley e basket, spesso in contemporanea, con squadre di categoria e settori giovanili strutturati. Calcio: allenatore in scuola calcio a Roma; dal settembre 2020, dopo il rientro a Trapani, collaborazioni con squadre di calcio del territorio; dal 2023/24 esperienza nello staff dell'Under 15 nazionale del Trapani Calcio (Serie C). Volley: da dicembre 2022 primo incarico come preparatore all'Ericina Volley (B2); dal 2023/24 anche alla Fenice Volley (Serie C), con promozione e Coppa Sicilia nella stessa stagione; dal 2024/25 in staff al Marsala Volley (Serie B1 e A2), con salvezza raggiunta e riconferma. Basket: dall'estate 2023 con i Trapani Shark, come preparatore della prima squadra e responsabile dell'intero settore giovanile (Under 13–Under 17); stagione 23/24 con vittoria di Supercoppa e campionato di A2."
+    bio: "Percorso costruito sul campo, tra risultati e formazione continua. Doppia laurea in Scienze Motorie: triennale a Perugia e magistrale in Scienze e Tecniche dello Sport (2025). Tripla certificazione ELAV: Sport Performance, Esperto Fitness e Rieducatore Funzionale. Esperienza multi-sport ad alto livello. Un percorso trasversalite: preparazione atletica in calcio, volley e basket, spesso in contemporanea, con squadre di categoria e settori giovanili strutturati. \n\nCalcio: allenatore in scuola calcio a Roma; dal settembre 2020, dopo il rientro a Trapani, collaborazioni con squadre di calcio del territorio; dal 2023/24 esperienza nello staff dell'Under 15 nazionale del Trapani Calcio (Serie C). \n\nVolley: da dicembre 2022 primo incarico come preparatore all'Ericina Volley (B2); dal 2023/24 anche alla Fenice Volley (Serie C), con promozione e Coppa Sicilia nella stessa stagione; dal 2024/25 in staff al Marsala Volley (Serie B1 e A2), con salvezza raggiunta e riconferma. \n\nBasket: dall'estate 2023 con i Trapani Shark, come preparatore della prima squadra e responsabile dell'intero settore giovanile (Under 13–Under 17); stagione 23/24 con vittoria di Supercoppa e campionato di A2."
   },
 ];
