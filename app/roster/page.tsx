@@ -1,11 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import GlobalStyles from "../components/GlobalStyles";
-import { ROSTER, ROLE_ORDER, type Athlete } from "../data/roster";
+import { ROSTER, ROLE_ORDER, slugify, type Athlete } from "../data/roster";
 
 function isValidImageUrl(url?: string): boolean {
   if (!url) return false;
@@ -107,8 +108,9 @@ export default function RosterPage() {
                   const hasValidImage = isValidImageUrl(atleta.image);
 
                   return (
-                    <div
+                    <Link
                       key={`${atleta.surname}-${index}`}
+                      href={`/player/${slugify(atleta)}`}
                       style={{
                         position: "relative",
                         height: 330,
@@ -116,9 +118,13 @@ export default function RosterPage() {
                         overflow: "hidden",
                         background: "linear-gradient(180deg, #2a0b12 0%, #120407 100%)",
                         border: "1px solid rgba(255, 255, 255, 0.1)",
-                        boxShadow: "0 8px 20px rgba(0,0,0,0.3)"
+                        boxShadow: "0 8px 20px rgba(0,0,0,0.3)",
+                        display: "block",
+                        textDecoration: "none",
+                        color: "inherit",
                       }}
                     >
+
                       {/* Foto dell'atleta */}
                       {hasValidImage ? (
                         <Image
@@ -155,7 +161,7 @@ export default function RosterPage() {
                           {atleta.surname}
                         </h3>
                       </div>
-                    </div>
+                    </Link>
                   );
                 })}
               </div>
