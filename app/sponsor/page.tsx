@@ -21,8 +21,8 @@ function SponsorGrid({ items }: { items: typeof SPONSOR }) {
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fill,minmax(280px,1fr))",
-        gap: 28,
+        gridTemplateColumns: "repeat(auto-fill,minmax(370px,1fr))",
+        gap: 32,
       }}
     >
       {items.map((s) => {
@@ -32,6 +32,7 @@ function SponsorGrid({ items }: { items: typeof SPONSOR }) {
             style={{
               position: "relative",
               width: "100%",
+              maxWidth: "380px",
               aspectRatio: "16/9",
               background: "#fff",
               borderRadius: 18,
@@ -43,8 +44,8 @@ function SponsorGrid({ items }: { items: typeof SPONSOR }) {
               src={s.file}
               alt={s.name}
               fill
-              style={{ objectFit: "contain", padding: 14 }}
-              sizes="(max-width: 760px) 90vw, 280px"
+              style={{ objectFit: "contain", padding: 1 }}
+              sizes="(max-width: 760px) 92vw, 380px"
             />
           </div>
         );
