@@ -34,15 +34,15 @@ export default function SponsorMarquee() {
           WebkitMaskImage: "linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent)",
         }}
       >
-        <div className="tv-sponsor-track" style={{ display: "flex", gap: 36, width: "max-content" }}>
+        <div className="tv-sponsor-track" style={{ display: "flex", gap: 48, width: "max-content" }}>
           {loop.map((s, i) => {
             const card = (
               <div
                 className="tv-sponsor-card"
                 style={{
                   position: "relative",
-                  width: "clamp(210px, 22vw, 300px)",
-                  height: "clamp(150px, 15vw, 200px)",
+                  width: "clamp(280px, 28vw, 380px)",
+                  height: "clamp(190px, 19vw, 250px)",
                   flexShrink: 0,
                   background: "#ffffff",
                   border: "1px solid rgba(0,0,0,0.08)",
@@ -55,7 +55,7 @@ export default function SponsorMarquee() {
                 }}
               >
                 <div style={{ position: "relative", width: "100%", height: "100%" }}>
-                  <Image src={s.file} alt={s.name} fill style={{ objectFit: "contain" }} sizes="(max-width: 640px) 210px, 300px" />
+                  <Image src={s.file} alt={s.name} fill style={{ objectFit: "contain" }} sizes="(max-width: 640px) 280px, 380px" />
                 </div>
               </div>
             );
@@ -82,7 +82,7 @@ export default function SponsorMarquee() {
 
       <style jsx>{`
         .tv-sponsor-track {
-          animation: tv-sponsor-scroll 42s linear infinite;
+          animation: tv-sponsor-scroll 52s linear infinite;
         }
         .tv-sponsor-viewport:hover .tv-sponsor-track {
           animation-play-state: paused;
