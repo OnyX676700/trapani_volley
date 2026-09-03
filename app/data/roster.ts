@@ -47,7 +47,7 @@ export const ROSTER: { stagione: string; femminile: Athlete[]; maschile: Athlete
       name: "Daniela",
       surname: "Inglese",
       role: "Palleggiatrice",
-      image: "/img/rosterF/Inglese.jpg",
+      image: "/img/rosterF/DanielaInglese.jpg",
       nationality: "Italia",
       nationalityCode: "ita",
       birthplace: "Erice (TP)",
