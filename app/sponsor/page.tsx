@@ -7,16 +7,25 @@ import Footer from "../components/Footer";
 import GlobalStyles from "../components/GlobalStyles";
 import { SPONSOR } from "../data/sponsor";
 
-function SponsorGrid() {
+/* Ordine e stile di ogni fascia, dal più alto al più basso */
+const LIVELLI = [
+  { key: "diamante", label: "Sponsor Diamante", color: "#b9e0ff" },
+  { key: "platino", label: "Sponsor Platino", color: "#e5e4e2" },
+  { key: "oro", label: "Sponsor Oro", color: "#d4af37" },
+  { key: "argento", label: "Sponsor Argento", color: "#c0c0c0" },
+  { key: "bronzo", label: "Sponsor Bronzo", color: "#cd7f32" },
+] as const;
+
+function SponsorGrid({ items }: { items: typeof SPONSOR }) {
   return (
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fill,minmax(500px,1fr))",
-        gap: 32,
+        gridTemplateColumns: "repeat(auto-fill,minmax(280px,1fr))",
+        gap: 28,
       }}
     >
-      {SPONSOR.map((s) => {
+      {items.map((s) => {
         const card = (
           <div
             className="tv-sponsor-card"
@@ -35,7 +44,7 @@ function SponsorGrid() {
               alt={s.name}
               fill
               style={{ objectFit: "contain", padding: 14 }}
-              sizes="(max-width: 760px) 90vw, 400px"
+              sizes="(max-width: 760px) 90vw, 280px"
             />
           </div>
         );
@@ -108,13 +117,61 @@ export default function SponsorPage() {
               fontSize: "clamp(2rem,4vw,3rem)",
               fontWeight: 700,
               color: "#fff",
-              marginBottom: 48,
+              marginBottom: 64,
             }}
           >
             Sponsor & Partner
           </h1>
 
-          <SponsorGrid />
+          {LIVELLI.map(({ key, label, color }) => {
+            const sponsorDelLivello = SPONSOR.filter(
+              (s) => s.livello === key
+            );
+            if (sponsorDelLivello.length === 0) return null;
+
+            return (
+              <div key={key} style={{ marginBottom: 72 }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 12,
+                    marginBottom: 28,
+                  }}
+                >
+                  <span
+                    style={{
+                      width: 10,
+                      height: 10,
+                      borderRadius: "50%",
+                      background: color,
+                      flexShrink: 0,
+                    }}
+                  />
+                  <h2
+                    style={{
+                      fontFamily: "'Playfair Display',serif",
+                      fontSize: "1.6rem",
+                      fontWeight: 700,
+                      color: "#fff",
+                      letterSpacing: 0.5,
+                    }}
+                  >
+                    {label}
+                  </h2>
+                  <div
+                    style={{
+                      flex: 1,
+                      height: 1,
+                      background: "rgba(255,255,255,0.12)",
+                    }}
+                  />
+                </div>
+
+                <SponsorGrid items={sponsorDelLivello} />
+              </div>
+            );
+          })}
         </div>
       </section>
       <Footer />

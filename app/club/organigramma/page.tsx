@@ -1,3 +1,4 @@
+//org/club/organigramma/page.tsx
 "use client";
 
 import Image from "next/image";
@@ -12,18 +13,20 @@ const ORGANIGRAMMA = [
   { nome: "Daniela Del Giudice", ruolo: "Team Manager", image: "/img/staff/DelGiudice.jpg" },
   { nome: "Rino Fontana", ruolo: "Dirigente", image: "" },
   { nome: "Maurizio Virgilio", ruolo: "Dirigente", image: "/img/staff/Virgilio.jpg" },
-  { nome: "Enza Vario", ruolo: "Collaboratrice", image: "/img/staff/Vario.jpg" },
   { nome: "Ignazio Vario", ruolo: "Collaboratore", image: "/img/staff/IVario.jpg" },
-  { nome: "Santo Vassallo", ruolo: "Collaboratore", image: "/img/staff/Vassallo.jpg" },
+  { nome: "Santo Vassallo", ruolo: "Dirigente", image: "/img/staff/Vassallo.jpg" },
   { nome: "Francesco Oddo", ruolo: "Grafico & Social Media Manager", image: "" },
-
-  
-  
-  
-  
-  
-  
 ];
+
+/* Iniziali per il placeholder quando manca la foto */
+function iniziali(nome: string) {
+  return nome
+    .split(" ")
+    .map((p) => p[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+}
 
 export default function OrganigrammaPage() {
   return (
@@ -31,42 +34,120 @@ export default function OrganigrammaPage() {
       <GlobalStyles />
       <Header />
 
-      <section style={{ padding: "140px 24px 100px", maxWidth: 1100, margin: "0 auto" }}>
-        <div style={{ marginBottom: 48 }}>
-          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: "uppercase", color: "#8a2236", display: "block", marginBottom: 12 }}>
+      <section style={{ padding: "140px 24px 100px", maxWidth: 1200, margin: "0 auto" }}>
+        {/* Intestazione */}
+        <div style={{ marginBottom: 56, textAlign: "center" }}>
+          <span
+            style={{
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: 3,
+              textTransform: "uppercase",
+              color: "#8a2236",
+              display: "block",
+              marginBottom: 12,
+            }}
+          >
             Società
           </span>
-          <h1 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(2.5rem,5vw,3.5rem)", fontWeight: 700, color: "#6f1d2b", lineHeight: 1.15 }}>
+          <h1
+            style={{
+              fontFamily: "'Playfair Display',serif",
+              fontSize: "clamp(2.5rem,5vw,3.5rem)",
+              fontWeight: 700,
+              color: "#6f1d2b",
+              lineHeight: 1.15,
+            }}
+          >
             Organigramma
           </h1>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: 24 }}>
+        {/* Griglia membri */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))",
+            gap: 32,
+          }}
+        >
           {ORGANIGRAMMA.map(({ ruolo, nome, image }) => (
             <div
-              key={nome} /* Usa 'nome' come key per evitare duplicati */
+              key={nome}
               style={{
-                background: "#f7f5f4",
-                border: "1px solid rgba(0,0,0,0.08)",
-                borderRadius: 20,
-                padding: "24px",
                 display: "flex",
+                flexDirection: "column",
                 alignItems: "center",
-                gap: 16,
+                textAlign: "center",
               }}
             >
-              {/* Foto Membro */}
-              <div style={{ position: "relative", width: 64, height: 64, borderRadius: "50%", overflow: "hidden", flexShrink: 0, background: "#e0e0e0" }}>
-                <Image src={image} alt={nome} fill style={{ objectFit: "cover" }} />
+              {/* Foto (formato ritratto, come Imoco) */}
+              <div
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  aspectRatio: "3 / 4",
+                  borderRadius: 16,
+                  overflow: "hidden",
+                  background: "#f0eeed",
+                  marginBottom: 18,
+                  boxShadow: "0 4px 18px rgba(0,0,0,0.08)",
+                }}
+              >
+                {image ? (
+                  <Image
+                    src={image}
+                    alt={nome}
+                    fill
+                    sizes="(max-width: 768px) 45vw, 220px"
+                    style={{ objectFit: "cover" }}
+                  />
+                ) : (
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontFamily: "'Playfair Display',serif",
+                      fontSize: "2.2rem",
+                      fontWeight: 700,
+                      color: "#8a2236",
+                      background:
+                        "linear-gradient(135deg, #f7f5f4 0%, #ece7e6 100%)",
+                    }}
+                  >
+                    {iniziali(nome)}
+                  </div>
+                )}
               </div>
 
-              <div>
-                <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: "#ff7676", display: "block", marginBottom: 4 }}>
-                  {ruolo}
-                </span>
-                <div style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.2rem", fontWeight: 700, color: "#111111" }}>
-                  {nome}
-                </div>
+              {/* Ruolo */}
+              <span
+                style={{
+                  fontSize: 11,
+                  fontWeight: 700,
+                  letterSpacing: 1.5,
+                  textTransform: "uppercase",
+                  color: "#8a2236",
+                  marginBottom: 6,
+                }}
+              >
+                {ruolo}
+              </span>
+
+              {/* Nome */}
+              <div
+                style={{
+                  fontFamily: "'Playfair Display',serif",
+                  fontSize: "1.15rem",
+                  fontWeight: 700,
+                  color: "#111111",
+                  lineHeight: 1.3,
+                }}
+              >
+                {nome}
               </div>
             </div>
           ))}
