@@ -36,12 +36,19 @@ export const STAFF_TECNICO: StaffMember[] = [
     nome: "Giovanni Schifano",
     ruolo: "Coach",
     file: "/img/staff/Schifano.jpg",
+    bio: "Head Coach – Serie D Maschile | Stagione 2026/2027\n\nGiovanni Schifano vanta un percorso sportivo eclettico, che lo ha visto crescere prima nella pallacanestro e nel calcio a 5, prima di approdare definitivamente al mondo della pallavolo.\n\nMuove i primi passi nello sport a 10 anni con la pallacanestro, tra le file di AICS e Rosmini, esperienza che porta avanti fino ai 17 anni. Si dedica poi per qualche stagione al calcio a 5 con la PGS Don Bosco.\n\nNella stagione 2008/2009 arriva l'incontro con la pallavolo, tra i banchi di scuola e i primi campionati PGS. Nel 2018 inizia la sua avventura in Serie D con l'Entello, un percorso da atleta che culmina nella storica promozione in Serie C nella stagione 2021/2022.\n\nNel 2023, al termine dell'ultima stagione da giocatore in Serie C, è costretto ad appendere le scarpette al chiodo per motivi lavorativi. La voglia di restare in campo lo spinge però a intraprendere il percorso da allenatore, coronato anche dal conseguimento della qualifica di Allenatore di Secondo Grado.\n\nI primi passi in panchina arrivano alla Polisportiva Ericina, alla guida di una squadra di Prima Divisione Femminile. Sono proprio le atlete allenate all'Ericina a volerlo con sé anche alla Trapani Volley, dove entra a far parte dello staff tecnico.\n\nPer la stagione 2026/2027, Giovanni Schifano sarà Head Coach della Serie D Maschile della Trapani Volley, coronando un percorso fatto di passione, dedizione e crescita costante.",
   },
     {
     nome: "Gioacchino Di Bella",
     ruolo: "Assistant Coach",
     file: "/img/staff/DiBella.jpg",
     bio: "Gioacchino Di Bella vanta una lunga esperienza nel mondo della pallavolo, iniziata negli anni '80 con la C.C.P. Clambra, dove ha completato il percorso nel settore giovanile fino ad arrivare al debutto in Prima Squadra.\n\nNel corso della sua carriera da giocatore ha vestito le maglie di Volley Paceco, Polisportiva Valderice, Pallavolo Trapani, Fortitudo Buseto ed Entello Volley, disputando diversi campionati di Serie C e Serie D.\n\nIl suo percorso sportivo gli ha permesso di maturare una solida conoscenza tecnica e tattica della pallavolo, oltre a una significativa esperienza sul campo e una profonda cultura sportiva.\n\nPer la stagione 2026/2027 entra a far parte dello staff tecnico del Trapani Volley, ricoprendo il ruolo di Assistant Coach della Prima Squadra Femminile, mettendo a disposizione esperienza, competenza e passione al servizio del gruppo.",
+  },
+    {
+    nome: "Alessio Gatto",
+    ruolo: "Assistant Coach",
+    file: "/img/staff/AlessioGatto.jpg",
+    bio: "La Trapani Volley annuncia con entusiasmo la riconferma di Coach Alessio Gatto!\n\nUn volto ormai parte della nostra famiglia, pronto a proseguire il suo percorso con professionalità, entusiasmo e passione per la pallavolo.\n\nUn legame che si rinnova e che siamo felici di portare avanti anche in questa nuova stagione."
   },
   {
     nome: "Paolo Mangiapane",
@@ -54,5 +61,10 @@ export const STAFF_TECNICO: StaffMember[] = [
     ruolo: "Coach minivolley",
     file: "/img/staff/Vario.jpg",
     bio: "Enza Vario è una coach specializzata nel settore giovanile del volleyball. Ha maturato un'esperienza consolidata nel coaching di giovani atleti, con un approccio orientato alla crescita personale e allo sviluppo tecnico. La sua passione per il volleyball e la sua capacità di motivare i giovani atleti la rendono un elemento chiave dello staff tecnico del Trapani Volley."
+  },
+  {
+    nome: "Lucia Rallo",
+    ruolo: "Coach minivolley",
+    file: "/img/staff/LuciaRallo.jpg",
   }
 ];

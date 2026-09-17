@@ -64,6 +64,50 @@ export default function GlobalStyles() {
 .tv-sponsor-track:hover {
   animation-play-state: paused;
 }
+
+      /* ── Griglie pagine di dettaglio (player + staff) ── */
+      .tv-detail-hero-grid {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        gap: 40px;
+        align-items: center;
+      }
+      .tv-detail-body-grid {
+        display: grid;
+        grid-template-columns: 1fr 320px;
+        gap: 50px;
+      }
+      @media (max-width: 680px) {
+        .tv-detail-hero-grid {
+          grid-template-columns: 1fr;
+          justify-items: center;
+          text-align: center;
+          gap: 24px;
+        }
+        .tv-detail-hero-grid > div:first-child {
+          width: 200px !important;
+          height: 260px !important;
+        }
+      }
+      @media (max-width: 900px) {
+        .tv-detail-body-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ── News carousel: respiro ridotto su mobile ── */
+      @media (max-width: 640px) {
+        .tv-news-slide { aspect-ratio: 4/5 !important; }
+        .tv-news-slide > div > div:last-child { padding: 20px 18px !important; }
+      }
+      @media (max-width: 420px) {
+        .tv-news-slide { aspect-ratio: 3/4 !important; }
+      }
+
+      /* ── Utility generiche per sezioni con padding grande ── */
+      @media (max-width: 640px) {
+        section { padding-left: 16px; padding-right: 16px; }
+      }
     `;
     document.head.appendChild(s);
     return () => { const el = document.getElementById(id); if (el) el.remove(); };

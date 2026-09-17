@@ -77,20 +77,14 @@ export default async function PlayerPage({
             ← Torna al Roster
           </Link>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "260px 1fr",
-              gap: 40,
-              alignItems: "center",
-            }}
-          >
+          <div className="tv-detail-hero-grid">
             {/* Foto */}
             <div
               style={{
                 position: "relative",
-                width: 260,
-                height: 340,
+                width: "100%",
+                maxWidth: 260,
+                aspectRatio: "260 / 340",
                 borderRadius: 16,
                 overflow: "hidden",
                 background: "linear-gradient(180deg, #2a0b12 0%, #120407 100%)",
@@ -164,7 +158,7 @@ export default async function PlayerPage({
       </section>
 
       {/* Corpo pagina */}
-      <section style={{ maxWidth: 1000, margin: "0 auto", padding: "50px 16px", display: "grid", gridTemplateColumns: "1fr 320px", gap: 50 }}>
+      <section className="tv-detail-body-grid" style={{ maxWidth: 1000, margin: "0 auto", padding: "50px 16px" }}>
         {/* Colonna sinistra: Palmares + Carriera */}
         <div>
           {atleta.bio && (
