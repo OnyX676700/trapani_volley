@@ -5,7 +5,7 @@ import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import GlobalStyles from "../components/GlobalStyles";
-import { SPONSOR } from "../data/sponsor";
+import { SPONSOR, MAIN_SPONSOR, COLLABORAZIONI, type SponsorSenzaLivello } from "../data/sponsor";
 
 /* Ordine e stile di ogni fascia, dal più alto al più basso */
 const LIVELLI = [
@@ -16,7 +16,56 @@ const LIVELLI = [
   { key: "bronzo", label: "Sponsor Bronzo", color: "#cd7f32" },
 ] as const;
 
-function SponsorGrid({ items }: { items: typeof SPONSOR }) {
+type GridItem = SponsorSenzaLivello & { etichetta?: string };
+
+/* Main sponsor: uno per squadra, con didascalia sotto il logo */
+const MAIN_ITEMS: GridItem[] = [
+  { ...MAIN_SPONSOR.femminile, etichetta: "Main Sponsor Femminile" },
+  { ...MAIN_SPONSOR.maschile, etichetta: "Main Sponsor Maschile" },
+];
+
+function SectionHeader({ label, color }: { label: string; color: string }) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 12,
+        marginBottom: 28,
+      }}
+    >
+      <span
+        style={{
+          width: 10,
+          height: 10,
+          borderRadius: "50%",
+          background: color,
+          flexShrink: 0,
+        }}
+      />
+      <h2
+        style={{
+          fontFamily: "'Playfair Display',serif",
+          fontSize: "1.6rem",
+          fontWeight: 700,
+          color: "#fff",
+          letterSpacing: 0.5,
+        }}
+      >
+        {label}
+      </h2>
+      <div
+        style={{
+          flex: 1,
+          height: 1,
+          background: "rgba(255,255,255,0.12)",
+        }}
+      />
+    </div>
+  );
+}
+
+function SponsorGrid({ items }: { items: GridItem[] }) {
   return (
     <div
       style={{
@@ -50,6 +99,23 @@ function SponsorGrid({ items }: { items: typeof SPONSOR }) {
           </div>
         );
 
+        const caption = s.etichetta ? (
+          <span
+            style={{
+              display: "block",
+              marginTop: 12,
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: 2,
+              textTransform: "uppercase",
+              color: "#ff7676",
+              fontFamily: "'DM Sans',sans-serif",
+            }}
+          >
+            {s.etichetta}
+          </span>
+        ) : null;
+
         return s.url ? (
           <Link
             key={s.name}
@@ -61,10 +127,12 @@ function SponsorGrid({ items }: { items: typeof SPONSOR }) {
             style={{ display: "block" }}
           >
             {card}
+            {caption}
           </Link>
         ) : (
           <div key={s.name} aria-label={s.name}>
             {card}
+            {caption}
           </div>
         );
       })}
@@ -124,6 +192,13 @@ export default function SponsorPage() {
             Sponsor & Partner
           </h1>
 
+          {/* Main Sponsor */}
+          <div style={{ marginBottom: 72 }}>
+            <SectionHeader label="Main Sponsor" color="#ff7676" />
+            <SponsorGrid items={MAIN_ITEMS} />
+          </div>
+
+          {/* Fasce per livello */}
           {LIVELLI.map(({ key, label, color }) => {
             const sponsorDelLivello = SPONSOR.filter(
               (s) => s.livello === key
@@ -132,47 +207,19 @@ export default function SponsorPage() {
 
             return (
               <div key={key} style={{ marginBottom: 72 }}>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 12,
-                    marginBottom: 28,
-                  }}
-                >
-                  <span
-                    style={{
-                      width: 10,
-                      height: 10,
-                      borderRadius: "50%",
-                      background: color,
-                      flexShrink: 0,
-                    }}
-                  />
-                  <h2
-                    style={{
-                      fontFamily: "'Playfair Display',serif",
-                      fontSize: "1.6rem",
-                      fontWeight: 700,
-                      color: "#fff",
-                      letterSpacing: 0.5,
-                    }}
-                  >
-                    {label}
-                  </h2>
-                  <div
-                    style={{
-                      flex: 1,
-                      height: 1,
-                      background: "rgba(255,255,255,0.12)",
-                    }}
-                  />
-                </div>
-
+                <SectionHeader label={label} color={color} />
                 <SponsorGrid items={sponsorDelLivello} />
               </div>
             );
           })}
+
+          {/* Collaborazioni */}
+          {COLLABORAZIONI.length > 0 && (
+            <div style={{ marginBottom: 72 }}>
+              <SectionHeader label="Collaborazioni" color="rgba(255,255,255,0.6)" />
+              <SponsorGrid items={COLLABORAZIONI} />
+            </div>
+          )}
         </div>
       </section>
       <Footer />

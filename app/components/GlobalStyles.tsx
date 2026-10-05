@@ -77,37 +77,42 @@ export default function GlobalStyles() {
         grid-template-columns: 1fr 320px;
         gap: 50px;
       }
-      @media (max-width: 680px) {
-        .tv-detail-hero-grid {
-          grid-template-columns: 1fr;
-          justify-items: center;
-          text-align: center;
-          gap: 24px;
-        }
-        .tv-detail-hero-grid > div:first-child {
-          width: 200px !important;
-          height: 260px !important;
-        }
-      }
       @media (max-width: 900px) {
-        .tv-detail-body-grid {
-          grid-template-columns: 1fr;
-        }
-      }
+  .tv-desktop-nav { display: none !important; }
+  .tv-hamburger { display: flex !important; }
+}
 
-      /* ── News carousel: respiro ridotto su mobile ── */
-      @media (max-width: 640px) {
-        .tv-news-slide { aspect-ratio: 4/5 !important; }
-        .tv-news-slide > div > div:last-child { padding: 20px 18px !important; }
-      }
-      @media (max-width: 420px) {
-        .tv-news-slide { aspect-ratio: 3/4 !important; }
-      }
+/* prima era max-width: 760px — alzato a 900px perché tra 761 e 900px
+   il nav desktop (6 voci + dropdown + selettore lingua) non ci stava */
 
-      /* ── Utility generiche per sezioni con padding grande ── */
-      @media (max-width: 640px) {
-        section { padding-left: 16px; padding-right: 16px; }
-      }
+.tv-mobile-menu {
+  animation: tvMobileMenuIn 0.22s cubic-bezier(0.16,1,0.3,1) both;
+  transform-origin: top center;
+}
+@keyframes tvMobileMenuIn {
+  from { opacity: 0; transform: translateY(-10px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.tv-mobile-submenu {
+  animation: tvFadeUp 0.18s ease both;
+}
+
+@media (max-width: 360px) {
+  .tv-brand-text { max-width: 120px; }
+}
+@media (max-width: 320px) {
+  .tv-brand-text { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tv-mobile-menu, .tv-mobile-submenu, .tv-dropdown {
+    animation: none !important;
+  }
+  .tv-header, .tv-header * {
+    transition-duration: 0.01ms !important;
+  }
+}
     `;
     document.head.appendChild(s);
     return () => { const el = document.getElementById(id); if (el) el.remove(); };

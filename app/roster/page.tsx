@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { Suspense } from "react";
 import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import GlobalStyles from "../components/GlobalStyles";
-import { ROSTER, ROLE_ORDER, slugify, type Athlete } from "../data/roster";
+import { ROSTER, ROLE_ORDER, ROLE_ORDER_M, slugify, type Athlete } from "../data/roster";
 
 function isValidImageUrl(url?: string): boolean {
   if (!url) return false;
@@ -14,9 +15,15 @@ function isValidImageUrl(url?: string): boolean {
   return trimmed.startsWith("/") || trimmed.startsWith("http://") || trimmed.startsWith("https://");
 }
 
-export default function RosterPage() {
-  const [tab, setTab] = useState<"femminile" | "maschile">("femminile");
+function RosterContent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // La squadra selezionata vive nell'URL: /roster?squadra=maschile
+  const tab: "femminile" | "maschile" =
+    searchParams.get("squadra") === "maschile" ? "maschile" : "femminile";
   const list = ROSTER[tab];
+  const roleOrder = tab === "maschile" ? ROLE_ORDER_M : ROLE_ORDER;
 
   // Raggruppa gli atleti per ruolo
   const groupedAthletes = list.reduce<Record<string, Athlete[]>>((acc, athlete) => {
@@ -28,8 +35,8 @@ export default function RosterPage() {
 
   // Ordina i ruoli secondo l'ordine prefissato
   const sortedRoles = Object.keys(groupedAthletes).sort((a, b) => {
-    const indexA = ROLE_ORDER.indexOf(a);
-    const indexB = ROLE_ORDER.indexOf(b);
+    const indexA = roleOrder.indexOf(a);
+    const indexB = roleOrder.indexOf(b);
     if (indexA !== -1 && indexB !== -1) return indexA - indexB;
     if (indexA !== -1) return -1;
     if (indexB !== -1) return 1;
@@ -56,7 +63,7 @@ export default function RosterPage() {
             {(["femminile", "maschile"] as const).map((t) => (
               <button
                 key={t}
-                onClick={() => setTab(t)}
+                onClick={() => router.replace(`/roster?squadra=${t}`, { scroll: false })}
                 style={{
                   background: tab === t ? "#ff7676" : "transparent",
                   color: tab === t ? "#ffffff" : "rgba(255,255,255,0.6)",
@@ -172,5 +179,14 @@ export default function RosterPage() {
 
       <Footer />
     </main>
+  );
+}
+
+// useSearchParams richiede un Suspense boundary in Next.js 15+
+export default function RosterPage() {
+  return (
+    <Suspense fallback={null}>
+      <RosterContent />
+    </Suspense>
   );
 }

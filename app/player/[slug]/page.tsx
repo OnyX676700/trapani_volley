@@ -46,6 +46,11 @@ export default async function PlayerPage({
   const atleta = findAthlete(slug);
   if (!atleta) notFound();
 
+  // Squadra di appartenenza: serve al tasto "Torna al Roster"
+  const squadra = ROSTER.maschile.some((a) => slugify(a) === slug)
+    ? "maschile"
+    : "femminile";
+
   const hasValidImage = isValidImageUrl(atleta.image);
 
   return (
@@ -64,7 +69,7 @@ export default async function PlayerPage({
       >
         <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 16px" }}>
           <Link
-            href="/roster"
+            href={`/roster?squadra=${squadra}`}
             style={{
               color: "rgba(255,255,255,0.6)",
               fontSize: 13,
@@ -162,7 +167,15 @@ export default async function PlayerPage({
         {/* Colonna sinistra: Palmares + Carriera */}
         <div>
           {atleta.bio && (
-            <p style={{ fontSize: "1.05rem", lineHeight: 1.7, color: "rgba(255,255,255,0.85)", marginBottom: 40 }}>
+            <p
+              style={{
+                fontSize: "1.05rem",
+                lineHeight: 1.7,
+                color: "rgba(255,255,255,0.85)",
+                marginBottom: 40,
+                whiteSpace: "pre-line",
+              }}
+            >
               {atleta.bio}
             </p>
           )}
@@ -194,29 +207,29 @@ export default async function PlayerPage({
               <SectionTitle>Carriera</SectionTitle>
               <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
                 {atleta.carriera.map((stint, i) => (
-                    <li
-                        key={i}
-                        style={{
-                        padding: "10px 0",
-                        borderBottom: "1px solid rgba(255,255,255,0.08)",
-                        fontSize: "0.95rem",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: 2,
-                        fontFamily: "'DM Sans',sans-serif",
-                        }}
-                    >
-                        <div style={{ display: "flex", gap: 12 }}>
-                        <span style={{ color: "#ff7676", fontWeight: 700, minWidth: 110 }}>{stint.period}</span>
-                        <span style={{ color: "rgba(255,255,255,0.85)" }}>{stint.team}</span>
-                        </div>
-                        {stint.category && (
-                        <span style={{ marginLeft: 122, color: "rgba(255,255,255,0.5)", fontSize: "0.82rem" }}>
-                            {stint.category}
-                        </span>
-                        )}
-                    </li>
-                    ))}
+                  <li
+                    key={i}
+                    style={{
+                      padding: "10px 0",
+                      borderBottom: "1px solid rgba(255,255,255,0.08)",
+                      fontSize: "0.95rem",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 2,
+                      fontFamily: "'DM Sans',sans-serif",
+                    }}
+                  >
+                    <div style={{ display: "flex", gap: 12 }}>
+                      <span style={{ color: "#ff7676", fontWeight: 700, minWidth: 110 }}>{stint.period}</span>
+                      <span style={{ color: "rgba(255,255,255,0.85)" }}>{stint.team}</span>
+                    </div>
+                    {stint.category && (
+                      <span style={{ marginLeft: 122, color: "rgba(255,255,255,0.5)", fontSize: "0.82rem" }}>
+                        {stint.category}
+                      </span>
+                    )}
+                  </li>
+                ))}
               </ul>
             </div>
           )}

@@ -66,5 +66,10 @@ export const STAFF_TECNICO: StaffMember[] = [
     nome: "Lucia Rallo",
     ruolo: "Coach minivolley",
     file: "/img/staff/LuciaRallo.jpg",
+  },
+  {
+    nome: "Francesco Margagliotti",
+    ruolo: "Coach und 19/17",
+    file: "/img/staff/FrancescoMargagliotti.jpg",
   }
 ];

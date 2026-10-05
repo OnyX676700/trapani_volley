@@ -24,13 +24,13 @@ export const NAV_STRUCTURE: NavItem[] = [
   },
   {
     label: "Calendario",
-  submenu: [{ label: "Stagione 2026/2027", href: "/calendario" }],
+    submenu: [{ label: "Stagione 2026/2027", href: "/calendario" }],
   },
   {
     label: "Giovanili",
     submenu: [
-    { label: "Under 12-13-14-15-17 F", href: "/giovanili/femminili" },
-    { label: "Under 17 M", href: "/giovanili/maschili" },
+      { label: "Under 12-13-14-15-17 F", href: "/giovanili/femminili" },
+      { label: "Under 17 M", href: "/giovanili/maschili" },
     ],
   },
   { label: "Sponsor & Partner", href: "/sponsor" },
@@ -65,6 +65,15 @@ export default function Header() {
   const [langOpen, setLangOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // blocca lo scroll del body quando il menu mobile è aperto
+  useEffect(() => {
+    if (menuOpen) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => { document.body.style.overflow = prev; };
+    }
+  }, [menuOpen]);
+
   function handleNavClick(e: React.MouseEvent, href: string) {
     if (href.startsWith("/#")) {
       const id = href.split("#")[1];
@@ -72,7 +81,6 @@ export default function Header() {
         e.preventDefault();
         document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
       }
-      // se non siamo in home, lascia che Link navighi a /#id
     }
     setMenuOpen(false);
     setOpenMobile(null);
@@ -86,23 +94,27 @@ export default function Header() {
     closeTimer.current = setTimeout(() => setOpenDesktop(null), 150);
   }
 
+  const headerHeightPx = compact ? 60 : 76;
+
   return (
     <header
+      className="tv-header"
       style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000,
-        height: compact ? 60 : 76,
+        height: `calc(${headerHeightPx}px + env(safe-area-inset-top, 0px))`,
+        paddingTop: "env(safe-area-inset-top, 0px)",
         background: compact ? "rgba(53,10,16,0.96)" : "linear-gradient(135deg,#4f1218 0%,#6f1d2b 100%)",
         backdropFilter: compact ? "blur(18px)" : "none",
         borderBottom: "1px solid rgba(255,255,255,0.07)",
         display: "flex", alignItems: "center", justifyContent: "space-between",
-        padding: "0 clamp(18px,4vw,60px)",
+        padding: "env(safe-area-inset-top, 0px) clamp(14px,4vw,60px) 0",
         transition: "height 0.3s,background 0.3s",
         boxShadow: compact ? "0 4px 40px rgba(0,0,0,0.45)" : "0 2px 24px rgba(0,0,0,0.3)",
       }}
     >
-      <Link href="/" style={{ background: "none", border: "none", display: "flex", alignItems: "center", gap: 12, textDecoration: "none" }}>
-        <Logo size={compact ? 36 : 44} />
-        <span style={{ fontFamily: "'Playfair Display',serif", fontWeight: 900, fontSize: compact ? 15 : 17, color: "#fff", letterSpacing: 0.5 }}>
+      <Link href="/" className="tv-brand" style={{ background: "none", border: "none", display: "flex", alignItems: "center", gap: 10, textDecoration: "none", minWidth: 0 }}>
+        <Logo size={compact ? 34 : 42} />
+        <span className="tv-brand-text" style={{ fontFamily: "'Playfair Display',serif", fontWeight: 900, fontSize: compact ? "clamp(13px,3.6vw,15px)" : "clamp(14px,3.8vw,17px)", color: "#fff", letterSpacing: 0.5, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
           Trapani Volley
         </span>
       </Link>
@@ -193,10 +205,11 @@ export default function Header() {
         </div>
       </nav>
 
-      <button onClick={() => setMenuOpen((o) => !o)} aria-label="Menu" style={{
+      <button onClick={() => setMenuOpen((o) => !o)} aria-label="Menu" className="tv-hamburger" style={{
         display: "none", background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)",
-        borderRadius: 8, padding: "9px 10px", cursor: "pointer",
-      }} className="tv-hamburger">
+        borderRadius: 10, cursor: "pointer",
+        width: 44, height: 44, alignItems: "center", justifyContent: "center", flexShrink: 0,
+      }}>
         <span style={{ display: "block", width: 20, height: 2, background: "#fff", position: "relative",
           transform: menuOpen ? "rotate(45deg)" : "none", transition: "transform 0.2s" }}>
           <span style={{ position: "absolute", left: 0, width: 20, height: 2, background: "#fff",
@@ -207,20 +220,24 @@ export default function Header() {
       </button>
 
       {menuOpen && (
-        <div style={{
-          position: "absolute", top: compact ? 60 : 76, right: 12, left: 12,
+        <div className="tv-mobile-menu" style={{
+          position: "fixed",
+          top: `calc(${headerHeightPx}px + env(safe-area-inset-top, 0px) + 8px)`,
+          right: 12, left: 12,
           background: "linear-gradient(135deg,#4f1218 0%,#6f1d2b 100%)",
           borderRadius: 14, padding: 10,
           boxShadow: "0 12px 40px rgba(0,0,0,0.45)", border: "1px solid rgba(255,255,255,0.12)",
           display: "flex", flexDirection: "column", gap: 4,
-          maxHeight: "calc(100vh - 100px)", overflowY: "auto",
+          maxHeight: "calc(100vh - 100px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px))",
+          overflowY: "auto",
+          paddingBottom: "calc(10px + env(safe-area-inset-bottom, 0px))",
         }}>
           {NAV_STRUCTURE.map((item) => {
             if (!item.submenu) {
               return (
                 <Link key={item.label} href={item.href!} onClick={(e) => handleNavClick(e, item.href!)} style={{
-                  color: "#fff", padding: "11px 14px", borderRadius: 8,
-                  fontFamily: "'DM Sans',sans-serif", fontSize: 14, fontWeight: 500, textDecoration: "none",
+                  color: "#fff", padding: "13px 14px", borderRadius: 8,
+                  fontFamily: "'DM Sans',sans-serif", fontSize: 15, fontWeight: 500, textDecoration: "none",
                 }}>
                   {item.label}
                 </Link>
@@ -232,7 +249,7 @@ export default function Header() {
                 <button onClick={() => setOpenMobile(isOpen ? null : item.label)} style={{
                   width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center",
                   background: "none", border: "none", color: "#fff",
-                  padding: "11px 14px", borderRadius: 8, fontFamily: "'DM Sans',sans-serif", fontSize: 14, fontWeight: 500,
+                  padding: "13px 14px", borderRadius: 8, fontFamily: "'DM Sans',sans-serif", fontSize: 15, fontWeight: 500,
                 }}>
                   {item.label}
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
@@ -241,10 +258,10 @@ export default function Header() {
                   </svg>
                 </button>
                 {isOpen && (
-                  <div style={{ paddingLeft: 14, display: "flex", flexDirection: "column" }}>
+                  <div className="tv-mobile-submenu" style={{ paddingLeft: 14, display: "flex", flexDirection: "column" }}>
                     {item.submenu.map((sub) => (
                       <Link key={sub.label} href={sub.href} onClick={(e) => handleNavClick(e, sub.href)} style={{
-                        color: "#fff", padding: "9px 14px", fontSize: 13.5, textDecoration: "none",
+                        color: "#fff", padding: "11px 14px", fontSize: 14, textDecoration: "none",
                       }}>
                         {sub.label}
                       </Link>
@@ -259,7 +276,7 @@ export default function Header() {
               <button key={l.code} onClick={() => setLang(l.code)} style={{
                 background: lang === l.code ? "rgba(255,255,255,0.2)" : "rgba(255,255,255,0.08)",
                 border: "1px solid rgba(255,255,255,0.15)", borderRadius: 50, color: "#fff",
-                padding: "6px 14px", fontSize: 12.5, fontWeight: 700, cursor: "pointer",
+                padding: "8px 16px", fontSize: 13, fontWeight: 700, cursor: "pointer",
               }}>
                 {l.label}
               </button>

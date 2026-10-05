@@ -3,11 +3,19 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { SPONSOR } from "../data/sponsor";
+import { SPONSOR, MAIN_SPONSOR, COLLABORAZIONI, type SponsorSenzaLivello } from "../data/sponsor";
+
+// Ordine nel carosello: main sponsor, sponsor per livello, collaborazioni
+const ITEMS: SponsorSenzaLivello[] = [
+  MAIN_SPONSOR.femminile,
+  MAIN_SPONSOR.maschile,
+  ...SPONSOR,
+  ...COLLABORAZIONI,
+];
 
 export default function SponsorMarquee() {
   // duplichiamo la lista per ottenere il loop infinito senza scatti
-  const loop = [...SPONSOR, ...SPONSOR];
+  const loop = [...ITEMS, ...ITEMS];
 
   return (
     <section style={{ background: "#fff", padding: "80px 0", overflow: "hidden" }}>
