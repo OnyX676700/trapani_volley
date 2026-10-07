@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Logo from "./Logo";
+import { useStandalone } from "../lib/useStandalone";
 
 type NavItem = {
   label: string;
@@ -17,8 +18,8 @@ export const NAV_STRUCTURE: NavItem[] = [
     label: "Club",
     submenu: [
       { label: "Storia", href: "/club/storia" },
-      { label: "Organigramma", href: "../club/organigramma" },
-      { label: "Staff tecnico", href: "../club/staff-tecnico" },
+      { label: "Organigramma", href: "/club/organigramma" },
+      { label: "Staff tecnico", href: "/club/staff-tecnico" },
       { label: "Roster M/F", href: "/roster" },
     ],
   },
@@ -54,7 +55,8 @@ function useScrollY() {
 
 export default function Header() {
   const scrollY = useScrollY();
-  const compact = scrollY > 50;
+  const standalone = useStandalone();
+  const compact = !standalone && scrollY > 50;
   const pathname = usePathname();
   const router = useRouter();
 
@@ -79,7 +81,7 @@ export default function Header() {
       const id = href.split("#")[1];
       if (pathname === "/") {
         e.preventDefault();
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+        document.getElementById(id)?.scrollIntoView({ behavior: standalone ? "auto" : "smooth" });
       }
     }
     setMenuOpen(false);
@@ -228,7 +230,7 @@ export default function Header() {
           borderRadius: 14, padding: 10,
           boxShadow: "0 12px 40px rgba(0,0,0,0.45)", border: "1px solid rgba(255,255,255,0.12)",
           display: "flex", flexDirection: "column", gap: 4,
-          maxHeight: "calc(100vh - 100px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px))",
+          maxHeight: "calc(100dvh - 100px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px))",
           overflowY: "auto",
           paddingBottom: "calc(10px + env(safe-area-inset-bottom, 0px))",
         }}>

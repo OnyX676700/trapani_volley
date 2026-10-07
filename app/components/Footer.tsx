@@ -88,7 +88,7 @@ function Newsletter() {
             borderRadius: 50,
             padding: "11px 18px",
             color: "#fff",
-            fontSize: 14,
+            fontSize: 16, // 16px evita lo zoom automatico su iPhone
             minWidth: 220,
             outline: "none",
           }}
@@ -119,7 +119,7 @@ export default function Footer() {
     <footer
       style={{
         background: "#4f1218",
-        padding: "64px 24px 0",
+        padding: "64px 24px env(safe-area-inset-bottom, 0px)",
         color: "#fff",
         borderTop: "1px solid rgba(255,255,255,0.06)",
       }}

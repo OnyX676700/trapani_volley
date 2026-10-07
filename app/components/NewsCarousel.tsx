@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { NEWS } from "../data/news";
+import { useStandalone } from "../lib/useStandalone";
 
 const AUTOPLAY_MS = 6500;
 
@@ -12,13 +13,15 @@ export default function NewsCarousel() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const touchX = useRef<number | null>(null);
+  const standalone = useStandalone();
   const count = NEWS.length;
 
   useEffect(() => {
-    if (paused || count <= 1) return;
+    if (paused || standalone || count <= 1) return;
     timer.current = setInterval(() => setIndex((i) => (i + 1) % count), AUTOPLAY_MS);
     return () => { if (timer.current) clearInterval(timer.current); };
-  }, [paused, count]);
+  }, [paused, standalone, count]);
 
   if (count === 0) return null;
 
@@ -48,7 +51,17 @@ export default function NewsCarousel() {
         </div>
 
         {/* Slide principale */}
-        <div style={{ position: "relative", borderRadius: 24, overflow: "hidden", aspectRatio: "16/8", boxShadow: "0 30px 70px rgba(0,0,0,0.45)", background: "#000" }} className="tv-news-slide">
+        <div
+          style={{ position: "relative", borderRadius: 24, overflow: "hidden", aspectRatio: "16/8", boxShadow: "0 30px 70px rgba(0,0,0,0.45)", background: "#000" }}
+          className="tv-news-slide"
+          onTouchStart={(e) => { touchX.current = e.touches[0].clientX; }}
+          onTouchEnd={(e) => {
+            if (touchX.current === null) return;
+            const dx = e.changedTouches[0].clientX - touchX.current;
+            touchX.current = null;
+            if (Math.abs(dx) > 40) go(index + (dx < 0 ? 1 : -1));
+          }}
+        >
           {NEWS.map((item, i) => (
             <div
               key={item.slug}

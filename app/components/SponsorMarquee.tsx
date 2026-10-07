@@ -68,6 +68,9 @@ export default function SponsorMarquee() {
               </div>
             );
 
+            // la seconda copia serve solo al loop automatico: nell'app installata viene nascosta
+            const dupClass = i >= ITEMS.length ? "tv-sponsor-dup" : undefined;
+
             return s.url ? (
               <Link
                 key={`${s.name}-${i}`}
@@ -75,12 +78,13 @@ export default function SponsorMarquee() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Vai al sito di ${s.name}`}
+                className={dupClass}
                 style={{ display: "block", flexShrink: 0 }}
               >
                 {card}
               </Link>
             ) : (
-              <div key={`${s.name}-${i}`} aria-label={s.name} style={{ flexShrink: 0 }}>
+              <div key={`${s.name}-${i}`} aria-label={s.name} className={dupClass} style={{ flexShrink: 0 }}>
                 {card}
               </div>
             );
