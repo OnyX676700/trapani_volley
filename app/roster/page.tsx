@@ -49,7 +49,7 @@ function RosterContent() {
       <Header />
 
       {/* Hero / Header Pagina */}
-      <section style={{ paddingTop: 140, paddingBottom: 40, textAlign: "center", background: "linear-gradient(180deg, #1f070d 0%, #0f0608 100%)", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+      <section className="tv-page-top" style={{ paddingTop: 140, paddingBottom: 40, textAlign: "center", background: "linear-gradient(180deg, #1f070d 0%, #0f0608 100%)", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 16px" }}>
           <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: "uppercase", color: "#ff7676", display: "block", marginBottom: 8 }}>
             Stagione {ROSTER.stagione}
@@ -87,7 +87,7 @@ function RosterContent() {
       </section>
 
       {/* Griglia divisa per Ruoli */}
-      <section style={{ padding: "60px 16px", maxWidth: 1200, margin: "0 auto" }}>
+      <section className="tv-section" style={{ padding: "60px 16px", maxWidth: 1200, margin: "0 auto" }}>
         {list.length === 0 ? (
           <p style={{ textAlign: "center", color: "rgba(255,255,255,0.5)", fontSize: "1.1rem", margin: "60px 0" }}>
             Rosa {tab} in fase di completamento.
@@ -105,6 +105,7 @@ function RosterContent() {
 
               {/* Grid Atlete del Ruolo */}
               <div
+                className="tv-roster-grid"
                 style={{
                   display: "grid",
                   gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
@@ -118,6 +119,7 @@ function RosterContent() {
                     <Link
                       key={`${atleta.surname}-${index}`}
                       href={`/player/${slugify(atleta)}`}
+                      className="tv-roster-card"
                       style={{
                         position: "relative",
                         height: 330,
@@ -138,7 +140,7 @@ function RosterContent() {
                           src={atleta.image!}
                           alt={`${atleta.name} ${atleta.surname}`}
                           fill
-                          sizes="(max-width: 768px) 50vw, 260px"
+                          sizes="(max-width: 640px) 50vw, 260px"
                           style={{ objectFit: "cover", objectPosition: "top center" }}
                         />
                       ) : (

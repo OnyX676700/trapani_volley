@@ -13,7 +13,7 @@ import { ROSTER } from "./data/roster";
 /* ── Hero ── */
 function Hero() {
   return (
-    <section id="home" style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", textAlign: "center" }}>
+    <section id="home" style={{ position: "relative", minHeight: "100svh", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", textAlign: "center" }}>
       <div style={{ position: "absolute", inset: 0, zIndex: 0, backgroundImage: "url('/img/home.jpg')", backgroundSize: "cover", backgroundPosition: "center 30%", animation: "tvHeroZoom 22s ease-in-out infinite alternate" }} />
       <div style={{ position: "absolute", inset: 0, zIndex: 1, background: "linear-gradient(148deg, rgba(79,18,24,0.88) 0%, rgba(111,29,43,0.75) 45%, rgba(20,6,9,0.55) 100%)" }} />
       <div style={{ position: "absolute", inset: 0, zIndex: 2, pointerEvents: "none", background: "radial-gradient(ellipse at 50% 45%, transparent 40%, rgba(0,0,0,0.55) 100%)" }} />
@@ -226,7 +226,7 @@ function Roster() {
                       src={atleta.image!}
                       alt={`${atleta.name} ${atleta.surname}`}
                       fill
-                      sizes="(max-width: 640px) 220px, 260px"
+                      sizes="(max-width: 640px) 180px, 260px"
                       style={{ objectFit: "cover", objectPosition: "top center" }}
                     />
                   ) : (

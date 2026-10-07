@@ -68,6 +68,7 @@ function SectionHeader({ label, color }: { label: string; color: string }) {
 function SponsorGrid({ items }: { items: GridItem[] }) {
   return (
     <div
+      className="tv-sponsor-grid"
       style={{
         display: "grid",
         gridTemplateColumns: "repeat(auto-fill,minmax(370px,1fr))",
@@ -94,7 +95,7 @@ function SponsorGrid({ items }: { items: GridItem[] }) {
               alt={s.name}
               fill
               style={{ objectFit: "contain", padding: 1 }}
-              sizes="(max-width: 760px) 92vw, 380px"
+              sizes="(max-width: 640px) 50vw, 380px"
             />
           </div>
         );
@@ -160,6 +161,7 @@ export default function SponsorPage() {
       <GlobalStyles />
       <Header />
       <section
+        className="tv-page-top tv-page-bottom"
         style={{
           padding: "160px 24px 100px",
           background: "#0d0d0d",
@@ -181,6 +183,7 @@ export default function SponsorPage() {
             Insieme a noi
           </span>
           <h1
+            className="tv-page-title"
             style={{
               fontFamily: "'Playfair Display',serif",
               fontSize: "clamp(2rem,4vw,3rem)",

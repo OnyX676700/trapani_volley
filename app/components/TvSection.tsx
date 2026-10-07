@@ -22,10 +22,11 @@ export default function TvSection() {
   if (!featured) return null;
 
   return (
-    <section id="la-tv" style={{ background: "#ffffff", padding: "90px 24px" }}>
+    <section id="la-tv" className="tv-section" style={{ background: "#ffffff", padding: "90px 24px" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         {/* ── Header ── */}
         <div
+          className="tv-section-head"
           style={{
             display: "flex",
             alignItems: "flex-end",
@@ -37,6 +38,7 @@ export default function TvSection() {
         >
           <div>
             <h2
+              className="tv-section-title"
               style={{
                 fontFamily: "'Playfair Display',serif",
                 fontSize: "clamp(2rem,4vw,3rem)",
@@ -100,6 +102,7 @@ export default function TvSection() {
               }}
             />
             <span
+              className="tv-play-big"
               style={{
                 position: "absolute",
                 top: "50%",
@@ -138,7 +141,7 @@ export default function TvSection() {
             >
               {featured.tag}
             </span>
-            <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "24px 26px", zIndex: 2 }}>
+            <div className="tv-video-caption" style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "24px 26px", zIndex: 2 }}>
               <h3
                 style={{
                   fontFamily: "'Playfair Display',serif",

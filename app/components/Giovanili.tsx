@@ -25,7 +25,7 @@ const GIOVANILI: GiovanileItem[] = [
 
 export default function Giovanili() {
   return (
-    <section id="giovanili" style={{ padding: "100px 24px", background: "#ffffff" }}>
+    <section id="giovanili" className="tv-section" style={{ padding: "100px 24px", background: "#ffffff" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <SectionHeading eyebrow="Il nostro futuro" title="Settore Giovanile" />
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: 24 }}>

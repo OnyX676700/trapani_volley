@@ -30,18 +30,19 @@ export default function NewsCarousel() {
   return (
     <section
       id="news"
+      className="tv-section"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       style={{ position: "relative", background: "#160a0c", padding: "90px 24px", overflow: "hidden" }}
     >
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 20% 0%, rgba(111,29,43,0.35), transparent 55%)", pointerEvents: "none" }} />
       <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative" }}>
-        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 16, marginBottom: 36 }}>
+        <div className="tv-section-head" style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 16, marginBottom: 36 }}>
           <div>
             <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: "uppercase", color: "#ff7676", display: "block", marginBottom: 12 }}>
               Aggiornamenti
             </span>
-            <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#fff", lineHeight: 1.15 }}>
+            <h2 className="tv-section-title" style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#fff", lineHeight: 1.15 }}>
               Ultime notizie
             </h2>
           </div>
@@ -92,7 +93,7 @@ export default function NewsCarousel() {
                 sizes="(max-width: 900px) 100vw, 1200px"
               />
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(0deg, rgba(10,4,5,0.92) 0%, rgba(10,4,5,0.35) 55%, rgba(10,4,5,0.1) 100%)" }} />
-              <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "36px 40px" }}>
+              <div className="tv-news-caption" style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "36px 40px" }}>
                 {item.badge && (
                   <span style={{ display: "inline-block", background: "#6f1d2b", color: "#fff", fontSize: 10, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", padding: "5px 14px", borderRadius: 50, marginBottom: 14 }}>
                     {item.badge}
@@ -102,7 +103,7 @@ export default function NewsCarousel() {
                 <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(1.3rem,2.6vw,2rem)", fontWeight: 700, color: "#fff", marginBottom: 10, maxWidth: 640 }}>
                   {item.title}
                 </h3>
-                <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.72)", lineHeight: 1.7, maxWidth: 560 }}>{item.text}</p>
+                <p className="tv-news-text" style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.72)", lineHeight: 1.7, maxWidth: 560 }}>{item.text}</p>
               </div>
             </div>
           ))}
@@ -111,6 +112,7 @@ export default function NewsCarousel() {
             <>
               <button
                 aria-label="Notizia precedente"
+                className="tv-news-nav"
                 onClick={() => go(index - 1)}
                 style={navBtnStyle("left")}
               >
@@ -118,6 +120,7 @@ export default function NewsCarousel() {
               </button>
               <button
                 aria-label="Notizia successiva"
+                className="tv-news-nav"
                 onClick={() => go(index + 1)}
                 style={navBtnStyle("right")}
               >

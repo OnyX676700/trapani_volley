@@ -45,6 +45,7 @@ function Newsletter() {
 
   return (
     <div
+      className="tv-newsletter"
       style={{
         maxWidth: 1100,
         margin: "0 auto 48px",
@@ -75,7 +76,7 @@ function Newsletter() {
           Iscriviti per ricevere risultati e news di Trapani Volley via email.
         </p>
       </div>
-      <form onSubmit={handleSubmit} style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+      <form className="tv-newsletter-form" onSubmit={handleSubmit} style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
         <input
           type="email"
           required
@@ -117,6 +118,7 @@ function Newsletter() {
 export default function Footer() {
   return (
     <footer
+      className="tv-footer"
       style={{
         background: "#4f1218",
         padding: "64px 24px env(safe-area-inset-bottom, 0px)",
@@ -126,6 +128,7 @@ export default function Footer() {
     >
       <Newsletter />
       <div
+        className="tv-footer-grid"
         style={{
           maxWidth: 1100,
           margin: "0 auto",

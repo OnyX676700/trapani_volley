@@ -27,7 +27,7 @@ export default function Calendario({ squadra = "femminile" }: { squadra?: Squadr
   const prossimeOrdinate = [...prossime].sort((a, b) => a.giornata - b.giornata);
 
   return (
-    <section id="calendario" style={{ padding: "100px 24px", background: "#ffffff" }}>
+    <section id="calendario" className="tv-section" style={{ padding: "100px 24px", background: "#ffffff" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <SectionHeading eyebrow={`Calendario ${label}`} title="Stagione 2026/2027" />
 

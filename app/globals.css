@@ -57,7 +57,6 @@ img {
 
 /* ── Solo quando è installata come app ── */
 @media (display-mode: standalone) {
-  /* niente animazioni, transizioni, smooth scroll, zoom dell'hero */
   *,
   *::before,
   *::after {
@@ -66,7 +65,6 @@ img {
     scroll-behavior: auto !important;
   }
 
-  /* sponsor: da marquee automatico a striscia scorrevole con il dito */
   .tv-sponsor-viewport {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -76,13 +74,77 @@ img {
     display: none;
   }
   .tv-sponsor-dup {
-    display: none !important; /* la copia serve solo al loop automatico */
+    display: none !important;
   }
 
-  /* niente effetti hover che restano "incollati" dopo il tap */
   .tv-sponsor-card:hover,
   .tv-video-featured:hover,
   .tv-video-thumb:hover {
     transform: none !important;
   }
+}
+
+/* ── Telefoni (≤ 640px) ── */
+@media (max-width: 640px) {
+  /* riduce in un colpo solo tutto ciò che è in rem */
+  html { font-size: 14.5px; }
+
+  /* margini laterali più stretti su tutte le sezioni */
+  section { padding-left: 16px !important; padding-right: 16px !important; }
+  .tv-bleed { padding-left: 0 !important; padding-right: 0 !important; }
+
+  /* spazio verticale */
+  .tv-section { padding-top: 48px !important; padding-bottom: 48px !important; }
+  .tv-page-top { padding-top: 104px !important; }
+  .tv-page-bottom { padding-bottom: 56px !important; }
+  .tv-page-title { margin-bottom: 28px !important; }
+  .tv-section-head { margin-bottom: 20px !important; }
+  .tv-section-title { font-size: 1.6rem !important; }
+
+  /* news (home) */
+  .tv-news-slide { aspect-ratio: 4 / 3 !important; border-radius: 16px !important; }
+  .tv-news-caption { padding: 16px !important; }
+  .tv-news-caption h3 { font-size: 1.05rem !important; margin-bottom: 0 !important; }
+  .tv-news-text { display: none !important; }
+  .tv-news-nav { width: 34px !important; height: 34px !important; font-size: 20px !important; }
+
+  /* sponsor (home) */
+  .tv-sponsor-head { padding: 0 16px 20px !important; }
+  .tv-sponsor-track { gap: 16px !important; }
+  .tv-sponsor-track .tv-sponsor-card { width: 200px !important; height: 130px !important; }
+
+  /* sponsor (pagina): 2 colonne */
+  .tv-sponsor-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+
+  /* tv */
+  .tv-play-big { width: 52px !important; height: 52px !important; }
+  .tv-video-caption { padding: 14px 16px !important; }
+
+  /* roster home */
+  .roster-card { flex-basis: 180px !important; height: 280px !important; }
+
+  /* roster pagina: 2 colonne */
+  .tv-roster-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+  .tv-roster-card { height: 250px !important; }
+
+  /* news (pagina) */
+  .tv-news-card-body { padding: 16px 18px 20px !important; }
+
+  /* footer */
+  .tv-footer { padding: 40px 16px env(safe-area-inset-bottom, 0px) !important; }
+  .tv-footer-grid { gap: 28px !important; padding-bottom: 28px !important; }
+  .tv-newsletter { padding: 20px 16px !important; margin-bottom: 32px !important; }
+  .tv-newsletter-form { width: 100%; }
+  .tv-newsletter-form input { flex: 1 1 100%; min-width: 0 !important; }
+  .tv-newsletter-form button { width: 100%; }
+}
+
+/* ── Pagine giocatore/staff: colonna unica fino a 800px ── */
+@media (max-width: 800px) {
+  .tv-detail-hero-grid,
+  .tv-detail-body-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .tv-detail-hero-grid > div:first-child { max-width: 200px !important; }
 }

@@ -60,6 +60,7 @@ export default async function PlayerPage({
 
       {/* Hero con foto + nome */}
       <section
+        className="tv-page-top"
         style={{
           paddingTop: 140,
           paddingBottom: 40,

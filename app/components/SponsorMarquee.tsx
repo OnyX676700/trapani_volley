@@ -18,13 +18,13 @@ export default function SponsorMarquee() {
   const loop = [...ITEMS, ...ITEMS];
 
   return (
-    <section style={{ background: "#fff", padding: "80px 0", overflow: "hidden" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px 40px", display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
+    <section className="tv-section tv-bleed" style={{ background: "#fff", padding: "80px 0", overflow: "hidden" }}>
+      <div className="tv-sponsor-head" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px 40px", display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
         <div>
           <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: "uppercase", color: "#8a2236", display: "block", marginBottom: 12 }}>
             Insieme a noi
           </span>
-          <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#6f1d2b" }}>
+          <h2 className="tv-section-title" style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#6f1d2b" }}>
             Sponsor &amp; Partner
           </h2>
         </div>
@@ -63,7 +63,7 @@ export default function SponsorMarquee() {
                 }}
               >
                 <div style={{ position: "relative", width: "100%", height: "100%" }}>
-                  <Image src={s.file} alt={s.name} fill style={{ objectFit: "contain" }} sizes="(max-width: 640px) 280px, 380px" />
+                  <Image src={s.file} alt={s.name} fill style={{ objectFit: "contain" }} sizes="(max-width: 640px) 200px, 380px" />
                 </div>
               </div>
             );
